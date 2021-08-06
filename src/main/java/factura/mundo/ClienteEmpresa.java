@@ -64,22 +64,15 @@ public class ClienteEmpresa extends Cliente {
 	
 	public ClienteEmpresa(BasicDBObject dbObjectClienteEmpresa) {
 
+		super(dbObjectClienteEmpresa);
+		
 		// Obtiene el valor del atributo nombreEmpresa mediante el metodo getString
 		this.nombreEmpresa = dbObjectClienteEmpresa.getString("nombreEmpresa");
 
 		// Obtiene el valor del atributo RUC mediante el metodo getString
 		this.ruc = dbObjectClienteEmpresa.getString("ruc");
 
-		BasicDBList lisClientes = (BasicDBList) dbObjectClienteEmpresa.get("empresa");
 		
-		// Crea un nuevo arrayList de tipo string
-		this.empresa = new ArrayList<String>();
-		
-		// Recorre el array list de clientes y agrega al array el objeto part llamando al
-		// metodo toString
-		for (Object emp : lisClientes) {
-			this.empresa.add(emp.toString());
-		}
 	}
 	
 	/*
@@ -96,19 +89,19 @@ public class ClienteEmpresa extends Cliente {
 		BasicDBObject dBObjectClienteEmpresa = new BasicDBObject();
 		
 		// Agrega el valor del atributo nombreEmpresa al objeto de mongoDB
-		dBObjectClienteEmpresa.append("NombreEmpresa: ", this.getNombreEmpresa());
+		dBObjectClienteEmpresa.append("nombreEmpresa", this.getNombreEmpresa());
 		
 		// Agrega el valor del atributo ruc al objeto de mongoDB
-		dBObjectClienteEmpresa.append("Ruc: ", this.getRuc());
+		dBObjectClienteEmpresa.append("ruc", this.getRuc());
 		
 		// Agrega el valor del atributo telefono al objeto de mongoDB
-		dBObjectClienteEmpresa.append("Telefono: ", this.getTelefono());
+		dBObjectClienteEmpresa.append("telefono", this.getTelefono());
 		
 		// Agrega el valor del atributo correo al objeto de mongoDB
-		dBObjectClienteEmpresa.append("Correo: ", this.getCorreo());
+		dBObjectClienteEmpresa.append("correo", this.getCorreo());
 		
 		// Agrega el valor del atributo direccion al objeto de mongoDB
-		dBObjectClienteEmpresa.append("Direccion: ", this.getDireccion());
+		dBObjectClienteEmpresa.append("direccion", this.getDireccion());
 		
 		
 		// Retorna el objeto mondoDB

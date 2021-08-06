@@ -80,18 +80,11 @@ public class Cliente {
 
 		// Obtiene el valor del atributo correo mediante el metodo getString
 		this.correo = dbObjectCliente.getString("correo");
+		
+		// Obtiene el valor del atributo correo mediante el metodo getString
+		this.direccion = dbObjectCliente.getString("direccion");
 
-		// lisClientes obtiene el valor del array list de nombre clientes
-		BasicDBList lisClientes = (BasicDBList) dbObjectCliente.get("clientes");
-
-		// Crea un nuevo arrayList de tipo string
-		this.clientes = new ArrayList<String>();
-
-		// Recorre el array list de clientes y agrega al array el objeto cli llamando al
-		// metodo toString
-		for (Object cli : lisClientes) {
-			this.clientes.add(cli.toString());
-		}
+	
 	}
 
 	/*
@@ -106,13 +99,13 @@ public class Cliente {
 		BasicDBObject dBObjectCliente = new BasicDBObject();
 
 		// Agrega el valor del atributo telefono al objeto de mongoDB
-		dBObjectCliente.append("Telefono: ", this.getTelefono());
+		dBObjectCliente.append("telefono", this.getTelefono());
 
 		// Agrega el valor del atributo correo al objeto mondoDB
-		dBObjectCliente.append("Correo: ", this.getCorreo());
+		dBObjectCliente.append("correo", this.getCorreo());
 
 		// Agrega el valor del atributo direccion al objeto mongoDB
-		dBObjectCliente.append("Direccion: ", this.getDireccion());
+		dBObjectCliente.append("direccion", this.getDireccion());
 
 		// Retorna el objeto mongo db
 		return dBObjectCliente;

@@ -64,22 +64,16 @@ public class ClienteParticular extends Cliente {
 	 */
 	public ClienteParticular(BasicDBObject dbObjectClienteParticular) {
 
+		super(dbObjectClienteParticular);
+		
 		// Obtiene el valor del atributo nombre mediante el metodo getString
 		this.nombre = dbObjectClienteParticular.getString("nombre");
 
 		// Obtiene el valor del atributo cedula mediante el metodo getString
 		this.cedula = dbObjectClienteParticular.getString("cedula");
+		
+		
 
-		BasicDBList lisClientes = (BasicDBList) dbObjectClienteParticular.get("particulares");
-
-		// Crea un nuevo arrayList de tipo string
-		this.particulares = new ArrayList<String>();
-
-		// Recorre el array list de clientes y agrega al array el objeto part llamando al
-		// metodo toString
-		for (Object part : lisClientes) {
-			this.particulares.add(part.toString());
-		}
 	}
 
 	/*
@@ -95,19 +89,19 @@ public class ClienteParticular extends Cliente {
 		BasicDBObject dBObjectClienteParticular = new BasicDBObject();
 
 		// Agrega el valor del atributo nombre al objeto de mongoDB
-		dBObjectClienteParticular.append("Nombre: ", this.getNombre());
+		dBObjectClienteParticular.append("nombre", this.getNombre());
 
 		// Agrega el valor del atributo cedula al objeto de mongoDB
-		dBObjectClienteParticular.append("Cedula: ", this.getCedula());
+		dBObjectClienteParticular.append("cedula", this.getCedula());
 
 		// Agrega el valor del atributo telefono al objeto de mongoDB
-		dBObjectClienteParticular.append("Telefono: ", this.getTelefono());
+		dBObjectClienteParticular.append("telefono", this.getTelefono());
 
 		// Agrega el valor del atributo direccion al objeto de mongoDB
-		dBObjectClienteParticular.append("Direccion: ", this.getDireccion());
+		dBObjectClienteParticular.append("direccion", this.getDireccion());
 
 		// Agrega el valor del atributo correo al objeto de mongoDB
-		dBObjectClienteParticular.append("Correo Electronico: ", this.getCorreo());
+		dBObjectClienteParticular.append("correo", this.getCorreo());
 
 		// Retorna el objeto mondoDB
 		return dBObjectClienteParticular;

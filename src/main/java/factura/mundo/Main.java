@@ -1,6 +1,9 @@
 package factura.mundo;
 
 import java.net.UnknownHostException;
+
+import conexion.mongodb.*;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,124 +13,26 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 
-
 public class Main {
-	
+
 	// -----------------------------------------------------------------
-		// Subprogramas
-		// -----------------------------------------------------------------
+	// Subprogramas
+	// -----------------------------------------------------------------
 
-		/**
-		 * Retorna un mensaje de bienvenida
-		 * 
-		 * @return El mensaje de bienvenida
-		 */
-		public static void bienvenida() {
+	/**
+	 * Retorna un mensaje de bienvenida
+	 * 
+	 * @return El mensaje de bienvenida
+	 */
+	public static void bienvenida() {
 
-			System.out.println("----Sistema de facturacion tienda electronica---");
-			System.out.println("Grupo: 4");
-			System.out.println("Asignatura: Programacion Orientada a Objetos");
-			System.out.println("Fecha: 23/06/2021 \n");
+		System.out.println("----Sistema de facturacion tienda electronica---");
+		System.out.println("Grupo: 4");
+		System.out.println("Asignatura: Programacion Orientada a Objetos");
+		System.out.println("Fecha: 23/06/2021 \n");
 
-		}
+	}
 
-		/**
-		 * Crea las coleccion para los clientes, tanto particulares como empresas y
-		 * particulares, para finalizar los productos
-		 * 
-		 * @param pCollectionProductos   > coleccion en la cual se guardan los datos de
-		 *                               los productos
-		 * @param pCollectionParticulare > coleccion en la cual se guardan los datos de
-		 *                               los clientes particulares
-		 * @param pCollectionEmpresa     > coleccion en la cual se guardan los datos de
-		 *                               los clientes empresariales
-		 * @param productos              > ArrayList de los productos
-		 * @param particulares           > ArrayList de los clientes particulares
-		 * @param empresas               > ArrayList de los clientes empresarialres
-		 */
-
-		public static void createDB(DBCollection pCollectionProductos,
-
-				DBCollection pCollectionParticulares, DBCollection pCollectionEmpresa,
-
-				ArrayList<Producto> productos, ArrayList<ClienteParticular> particulares,
-				ArrayList<ClienteEmpresa> empresas) {
-
-			// PASO 4: CRUD (Create-Read-Update-Delete)
-
-			// PASO 4.1: "CREATE" -> Metemos los objetos productos (o documentos en Mongo)
-			// en la coleccion Futbolista
-			for (Producto pro : productos) {
-				pCollectionProductos.insert(pro.toDBObjectProducto());
-			}
-
-			for (ClienteParticular parti : particulares) {
-
-				pCollectionParticulares.insert(parti.toDBObjectClienteParticular());
-			}
-
-			for (ClienteEmpresa empre : empresas) {
-
-				pCollectionEmpresa.insert(empre.toDBObjectClienteEmpresa());
-
-			}
-
-		}
-
-		/**
-		 * Lee los documentos almacenados en la base de datos
-		 * 
-		 * @param pCollectionProductos   > coleccion en la cual se guardan los datos de
-		 *                               los productos
-		 * @param pCollectionParticulare > coleccion en la cual se guardan los datos de
-		 *                               los clientes particulares
-		 * @param pCollectionEmpresa     > coleccion en la cual se guardan los datos de
-		 *                               los clientes empresariales
-		 */
-
-		public static void readDb(DBCollection pCollectionProductos,
-
-				DBCollection pCollectionParticulares, DBCollection pCollectionEmpresa) {
-
-			// PASO 4.2.1: "READ" -> Leemos todos los documentos de la base de datos
-
-			// Numero de documentos para la coleccion de los productos
-			int numDocumentosProductos = (int) pCollectionProductos.getCount();
-
-			// Numero de documentos para la coleccion de los clientes particulares
-			int numDocumentosParticulares = (int) pCollectionParticulares.getCount();
-
-			// Numero de documentos para la coleccion de los clientes empresariales
-			int numDocumentosEmpresas = (int) pCollectionEmpresa.getCount();
-
-			System.out.println("\n");
-			System.out.println("Número de documentos en la colección Productos: " + numDocumentosProductos + "\n");
-			System.out.println("Número de documentos en la colección Particulares: " + numDocumentosParticulares + "\n");
-			System.out.println("Número de documentos en la colección Empresas: " + numDocumentosEmpresas + "\n");
-
-			// Busco todos los documentos de la colección de los productos y los imprime
-
-			DBCursor cursor1 = pCollectionProductos.find();
-
-			DBCursor cursor2 = pCollectionParticulares.find();
-
-			DBCursor cursor3 = pCollectionEmpresa.find();
-
-			try {
-				while (cursor1.hasNext() || cursor2.hasNext( ) || cursor3.hasNext()) {
-
-					System.out.println(cursor1.next().toString());			
-					System.out.println(cursor1.next().toString());	
-					System.out.println(cursor3.next().toString());
-
-				}
-			} finally {
-				cursor1.close();
-				cursor2.close();
-				cursor3.close();
-			}
-
-		}
 	public static void main(String[] args) {
 
 		bienvenida();
@@ -355,13 +260,40 @@ public class Main {
 			// Obtenemos una colleccion para trabajar con los clientes de empresa
 			DBCollection collectionEmpresa = db.getCollection("Empresas");
 
-			//Crear la base de datos
-			createDB(collectionProductos, collectionParticulares, collectionEmpresa, productos, particulares, empresas);
+			// Instancia de la clase ConexionMongo
+			ConexionMongo mongo = new ConexionMongo();
 
-			DBCursor cursor1, cursor2, cursor3;
+			// Crear la base de datos con las colecciones
+			mongo.createDB(collectionProductos, collectionParticulares, collectionEmpresa, productos, particulares,
+					empresas);
 
-			//Leer la base de datos
-			readDb(collectionProductos, collectionParticulares, collectionEmpresa);
+			// Leer la coleccion de los productos
+			mongo.readDbProductos(collectionProductos);
+
+			if (tipoCliente == 1) {
+				// Leer la coleccion de los clientes particulares
+				mongo.readDbParticulares(collectionParticulares);
+
+			} else if (tipoCliente ==2) {
+				
+				//Leer la coleccion de los clientes empresariales
+				mongo.readDbEmpresa(collectionEmpresa);
+				
+			}
+			
+			//Quqry para leer los cliente de nombre Andres
+			System.out.println("\nClientes con el nombre Fernando");
+			mongo.readQueryNombreCliente(collectionParticulares);
+			
+			//Actualizar el precio de los productos de $1 a 3$
+			//mongo.updateDBPrecioProductos(collectionProductos);
+			
+			//Borrar los productos con el precio de $10
+			mongo.deleteDB(collectionProductos);
+			
+			//Leer nuevamente la base de datos
+			mongo.readDbProductos(collectionProductos);
+			
 
 			// PASO FINAL: Cerrar la conexion
 			mongoClient.close();
