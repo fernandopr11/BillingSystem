@@ -1,6 +1,7 @@
 package Interfaces;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,15 +19,7 @@ public class InterfazFacturaPrincipal extends JFrame{
 
 	public InterfazFacturaPrincipal() throws Exception {
 		
-		String tipFact = "";
-		/*boolean estFact;
-		estFact = panelBotonesIzq.getEstadoBoton();
-		if(estFact == true) {
-			tipFact = "Cliente empresa";
-		}else {
-			tipFact = "Cliente particular";
-		}*/
-		setTitle("Sistema de facturacion" + " (" + tipFact + ")");
+		setTitle("Sistema de facturacion");
 		setSize(645,760);
 		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,20 +49,15 @@ public class InterfazFacturaPrincipal extends JFrame{
 		
 		panelBotonesInfFactura = new PanelBotonesInfFactura();
 		centro2.add(panelBotonesInfFactura, BorderLayout.SOUTH);
-		
-		
 	}
 
 
 	public static void main(String[] args) {
-
 		try {
 			InterfazFacturaPrincipal ventanaPrincipal = new InterfazFacturaPrincipal();
 		}catch(Exception e) {
 
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Sistema de facturacion", JOptionPane.ERROR_MESSAGE);
 		}
-
 	}
-
 }

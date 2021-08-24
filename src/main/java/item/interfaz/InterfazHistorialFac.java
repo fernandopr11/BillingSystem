@@ -3,22 +3,26 @@ package item.interfaz;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
+import Interfaces.InterfazFacturaPrincipal;
+
 
 public class InterfazHistorialFac extends JFrame{
 
-	private InterfazHistorialFac interfazHistorialFac;
+	
 //	Atributos de paneles ------------------------------
 	private PanelInicio panelInicio;
 	private PanelBusqueda panelBusqueda;
 	private PanelBorrar panelBorrar;
 	
-	
+	private InterfazFacturaPrincipal principal;
 	
 	//Atributos de utilizados para el desarrollo del codigo****
 	
 	
 	//inicio metodo contructor *******************************************************************************
-	public InterfazHistorialFac() {
+	public InterfazHistorialFac(InterfazFacturaPrincipal pPrincipal) {
+		principal = pPrincipal;
+		principal.setVisible(false);
 		
 		setTitle(" Historial Factura ");
     	setSize(700, 650);
@@ -29,9 +33,9 @@ public class InterfazHistorialFac extends JFrame{
    // 	interfazHistorialFac = new InterfazHistorialFac();
     	
     	//crea el panel de datos de la muestra 
-    	panelInicio = new PanelInicio();
-    	panelBusqueda= new PanelBusqueda();
-    	panelBorrar=new PanelBorrar();
+    	panelInicio = new PanelInicio(this);
+    	panelBusqueda= new PanelBusqueda(this);
+    	panelBorrar=new PanelBorrar(this);
 
     	
     	//organiza el panel principal 
@@ -45,8 +49,8 @@ public class InterfazHistorialFac extends JFrame{
 	
 	
 	//METODO MAIN **********************************************************************************************
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	/*public static void main(String[] args) {
+		
 		try {
 			InterfazHistorialFac historial = new InterfazHistorialFac();
 			historial.setVisible(true);
@@ -56,25 +60,25 @@ public class InterfazHistorialFac extends JFrame{
 	
 	}
 	//fin metodo main ********************************************************************************************
-
+*/
 	
 	
 	//metodo de la implementacion buscar factura --------------------------------------------------
 //metodo y funcion de borrar ******************
 	public void borrar() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 //metodo de la funcion retroceder 
 	public void retrocederInterfazP() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 //metodo para buscar la factura 
 	public void buscarFacturaH() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

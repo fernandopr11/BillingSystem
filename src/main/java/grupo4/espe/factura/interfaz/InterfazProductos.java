@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import Interfaces.InterfazFacturaPrincipal;
+
 public class InterfazProductos extends JFrame {
 
 	// ---------------------------------------
@@ -35,16 +37,19 @@ public class InterfazProductos extends JFrame {
 	 */
 	private PanelProductos panelProductos;
 
-
+	
+	private InterfazFacturaPrincipal principal;
 	// Constructor
-	public InterfazProductos() {
+	public InterfazProductos(InterfazFacturaPrincipal pPrincipal) {
 
+		principal = pPrincipal;
+		principal.setVisible(false);
+		
 		setTitle("Inventario TecnoSmart");
-		setSize(800, 1000);
+		setSize(800, 1000); 
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		//Instancia de los paneles
 		panelNavegacion = new PanelNavegacion(this);
@@ -56,18 +61,12 @@ public class InterfazProductos extends JFrame {
 		add(panelNavegacion, BorderLayout.NORTH);
 		add(panelDatosProductos, BorderLayout.CENTER);
 		add(panelProductos, BorderLayout.EAST);
-		
-		
-		
-		
-		
-
 	}
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -79,5 +78,6 @@ public class InterfazProductos extends JFrame {
 			}
 		});
 	}
+*/
 
 }

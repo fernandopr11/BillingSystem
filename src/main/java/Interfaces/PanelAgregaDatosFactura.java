@@ -51,7 +51,7 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	public PanelAgregaDatosFactura(InterfazFacturaPrincipal pPrincipal) {
 		
 		principal = pPrincipal;
-		
+	
 		setLayout(new BorderLayout());
 	    //-------------------------------------------------------
 		//Panel Norte Agregar Datos Factura

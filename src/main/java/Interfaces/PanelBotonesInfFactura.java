@@ -1,5 +1,6 @@
 package Interfaces;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ public class PanelBotonesInfFactura extends JPanel implements ActionListener{
 
 	public PanelBotonesInfFactura() {
 		setLayout(new GridLayout(1, 3));
-		
+	
 		resetDatos = new JButton("Resetear datos");
 		add(resetDatos);
 		

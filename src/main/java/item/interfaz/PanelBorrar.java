@@ -23,9 +23,11 @@ private JButton btnBorrarHistorial;
 //fin atributos ************************************************
 	
 	//Metodo Constructor /////////////////////////////////////////////
-	public PanelBorrar() {
+	public PanelBorrar(InterfazHistorialFac pHistorial) {
 		
-JPanel panelInformacion;
+		historial = pHistorial;
+		
+		JPanel panelInformacion;
 		
 		setLayout(new BorderLayout());
 		

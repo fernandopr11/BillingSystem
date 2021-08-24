@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import Interfaces.InterfazFacturaPrincipal;
+
 public class PanelNavegacion extends JPanel  implements ActionListener{
 
 	// --------------------------------------
@@ -55,11 +57,14 @@ public class PanelNavegacion extends JPanel  implements ActionListener{
 	/*
 	 * Interfaz principal de la aplicacion
 	 */
-
 	private InterfazProductos productos;
 
+	//private InterfazFacturaPrincipal principal;
+	
 	public PanelNavegacion(InterfazProductos pProductos) {
 
+		productos = pProductos;
+		setBackground(Color.WHITE);
 		// Caracteristicas del panel
 		setLayout(new FlowLayout());
 		TitledBorder border = BorderFactory.createTitledBorder("Navegacion");
@@ -80,20 +85,33 @@ public class PanelNavegacion extends JPanel  implements ActionListener{
 		btnIrFactura.setBackground(Color.decode("#6CC3E3"));
 		btnIrFactura.setFont( new Font("Noto", Font.PLAIN, 15));
 		btnIrFactura.setForeground(Color.BLACK);
-		
+		btnIrFactura.addActionListener(this);
 		//Se agregan los elementos al panel
 		add(labLogoEmpresa);
 		add(labNombreEmpresa);
 		add(btnIrFactura);		
-		
-		
-		
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+
+		String comando = e.getActionCommand( );
+		
+		if( comando.equals(IR_FACTURA) )
+		{
+			InterfazFacturaPrincipal ventanaP;
+			try {
+				ventanaP = new InterfazFacturaPrincipal();
+				ventanaP.setVisible(true);
+				productos.setVisible(false);
+			} catch (Exception e1) { 
+				e1.printStackTrace();
+			}
+				
+		}
 		
 	}
-
+	
+	
+	
 }
