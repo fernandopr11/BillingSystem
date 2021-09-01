@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import factura.mundo.*;
+import grupo4.espe.factura.mundo.*;
 
 public class FacturaTest {
 
