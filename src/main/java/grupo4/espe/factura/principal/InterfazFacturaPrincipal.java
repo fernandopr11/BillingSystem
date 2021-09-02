@@ -20,7 +20,7 @@ public class InterfazFacturaPrincipal extends JFrame{
 	public InterfazFacturaPrincipal() throws Exception {
 		
 		setTitle("Sistema de facturacion");
-		setSize(645,760);
+		setSize(645,860);
 		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
@@ -44,7 +44,7 @@ public class InterfazFacturaPrincipal extends JFrame{
 		panelAgregaDatosFactura = new PanelAgregaDatosFactura(this);
 		centro2.add(panelAgregaDatosFactura, BorderLayout.NORTH);
 		
-		panelListaProductosFactura = new PanelListaProductosFactura();
+		panelListaProductosFactura = new PanelListaProductosFactura(this);
 		centro2.add(panelListaProductosFactura, BorderLayout.CENTER);
 		
 		panelBotonesInfFactura = new PanelBotonesInfFactura();

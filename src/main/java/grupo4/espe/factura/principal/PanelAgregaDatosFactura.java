@@ -24,29 +24,12 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	private JPanel agrDatosFactura;
 	private JButton bntAgrProducto;
 	private JLabel labCodigo;
-	private JLabel labDetalle;
-	private JLabel labCantidad;
-	private JLabel labVUnit;
-	private JLabel labVTotal;
-	private JTextField txtCodigo;
-	private JTextField txtDetalle;
-	private JTextField txtCantidad;
-	private JTextField txtVUnit;
-	private JTextField txtVTotal;
-	//Panel Sur Lista de producto agregados
-	private JPanel listaProductoFactura;
-	
-	private JLabel labCodigo2;
-	private JLabel labDetalle2;
-	private JLabel labCantidad2;
-	private JLabel labVUnit2;
-	private JLabel labVTotal2;
-	
-	// el modelo de tabla, aquí van a estar los datos.
-	 private DefaultTableModel model;
-	// la tabla
-	 private JTable table;
 
+	private JLabel labCantidad;
+
+	private JTextField txtCodigo;
+
+	private JTextField txtCantidad;
 
 	public PanelAgregaDatosFactura(InterfazFacturaPrincipal pPrincipal) {
 		
@@ -79,32 +62,10 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	  
 	     
 	     bntAgrProducto = new JButton("Agregar Producto");
+	     bntAgrProducto.setBackground(Color.decode("#6CC3E3"));
 	     bntAgrProducto.addActionListener(this);
 	     agrDatosFactura.add(bntAgrProducto, BorderLayout.SOUTH);
-	    //-------------------------------------------------------
-	     //Panel Sur Lista de producto agregados
-	     listaProductoFactura = new JPanel();
-	     listaProductoFactura.setLayout(new BorderLayout());
-	     add(listaProductoFactura, BorderLayout.SOUTH);
-	     
-	     LineBorder lineaBorde2 = new LineBorder(Color.BLACK); //Agregar borde con titulo
-		 TitledBorder borDatos2 = new TitledBorder(lineaBorde2, "Lista de compra");
-		 listaProductoFactura.setBorder(borDatos2);
-	     
-		 JScrollPane scrollPane = new JScrollPane();
-	     scrollPane.setBounds(10,11,560, 227);
-	     listaProductoFactura.add(scrollPane, BorderLayout.CENTER);
-	     
-	     //Nombre de columnas
-	     String[] nombreDeColumnas = {"Codigo", "Detalle", "Cantidad", 
-	    		 "V. Unitario", "V. Total"
-	     };
-	     //Crea un modelo de tabla
-	     model = new DefaultTableModel(null, nombreDeColumnas);
-	     //Añade modelo a tabla
-	     table = new JTable(model);
-	     //Muestra tabla en scrollpane
-	     scrollPane.setViewportView(table); 
+	    
 	}
 
 	public void actionPerformed(ActionEvent e) {

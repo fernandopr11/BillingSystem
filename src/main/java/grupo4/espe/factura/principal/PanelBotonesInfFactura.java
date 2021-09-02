@@ -18,12 +18,15 @@ public class PanelBotonesInfFactura extends JPanel implements ActionListener{
 		setLayout(new GridLayout(1, 3));
 	
 		resetDatos = new JButton("Resetear datos");
+		resetDatos.setBackground(Color.decode("#6CC3E3"));
 		add(resetDatos);
 		
 		borrarDato = new JButton("Borrar dato");
+		borrarDato.setBackground(Color.decode("#6CC3E3"));
 		add(borrarDato);
 		
 		generarFactura = new JButton("Generar Factura");
+		generarFactura.setBackground(Color.decode("#49FF33"));
 		add(generarFactura);
 	}
 

@@ -50,9 +50,11 @@ public class PanelBotonesIzq extends JPanel implements ActionListener{
 				int estado = itemEvent.getStateChange();
 				if(estado == ItemEvent.SELECTED){
 					clientePE.setText("Cliente particular");
+					clientePE.setBackground(Color.decode("#49FF33"));
 					estadoBoton = true;
 				} else {
 					clientePE.setText("Cliente empresa");
+					clientePE.setBackground(Color.decode("#DC76FC"));
 					estadoBoton = false;
 				}
 			}
@@ -61,24 +63,28 @@ public class PanelBotonesIzq extends JPanel implements ActionListener{
 		add(new JLabel());
 		//-----------------------------------------------------------------------
 		generarNuevaFactura = new JButton("Generar nueva factura");
+		generarNuevaFactura.setBackground(Color.decode("#27FCE5"));
 		generarNuevaFactura.addActionListener(this);
 		add(generarNuevaFactura);
 		//-----------------------------------------------------------------------
 		add(new JLabel());
 		//-----------------------------------------------------------------------
 		inventario = new JButton(INVENTARIO);
+		inventario.setBackground(Color.decode("#27FCE5"));
 		inventario.addActionListener(this);
 		add(inventario);
 		//-----------------------------------------------------------------------
 		add(new JLabel());
 		//-----------------------------------------------------------------------
 		historialFacturas = new JButton(HISTORIAL);
+		historialFacturas.setBackground(Color.decode("#27FCE5"));
 		historialFacturas.addActionListener(this);
 		add(historialFacturas);
 		//-----------------------------------------------------------------------
 		add(new JLabel());
 		//-----------------------------------------------------------------------
 		salir = new JButton(SALIR);
+		salir.setBackground(Color.decode("#FA757B"));
 		salir.addActionListener(this);
 		add(salir);
 	}
