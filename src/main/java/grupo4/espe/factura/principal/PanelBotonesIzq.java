@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import grupo4.espe.factura.historial.InterfazHistorialFac;
-import grupo4.espe.factura.inventario.InterfazProductos;
+import grupo4.espe.factura.inventario.Inventario;
 
 public class PanelBotonesIzq extends JPanel implements ActionListener{
 	private InterfazFacturaPrincipal principal;
@@ -91,7 +91,7 @@ public class PanelBotonesIzq extends JPanel implements ActionListener{
 
 		if( comando.equals(INVENTARIO) )
 		{
-			InterfazProductos frame = new InterfazProductos(principal);
+			Inventario frame = new Inventario(principal);
 			frame.setVisible(true);
 		}else if( comando.equals(HISTORIAL) )
 		{
