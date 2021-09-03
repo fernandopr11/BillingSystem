@@ -144,9 +144,7 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		String comando = evento.getActionCommand();
 		
 		if(comando.equals(GUARDAR)) {
-			
-			
-			
+			principal.guardarProducto();
 		}
 
 	}

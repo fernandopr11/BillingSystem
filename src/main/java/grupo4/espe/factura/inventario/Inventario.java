@@ -70,7 +70,7 @@ public class Inventario extends JFrame {
 		setTitle("Inventario TecnoSmart");
 		setSize(793, 561);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		setResizable(true);
 
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -87,5 +87,23 @@ public class Inventario extends JFrame {
 		contentPane.add(panelProductosRegistrados, BorderLayout.CENTER);
 
 	}
-
+	//Implementacion de metodos funcionales
+	
+	public void guardarProducto() {
+		
+	}
+	
+	public void actualizarProducto() {
+		
+	}
+	
+	public void eliminarProducto() {
+		
+	}
+	
+	public void eliminarTodo() {
+		
+	}
 }
+
+

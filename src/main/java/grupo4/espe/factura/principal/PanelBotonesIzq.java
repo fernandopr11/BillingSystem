@@ -17,15 +17,12 @@ import grupo4.espe.factura.inventario.Inventario;
 
 public class PanelBotonesIzq extends JPanel implements ActionListener{
 	private InterfazFacturaPrincipal principal;
-
+	//Constantes de botones panel izquierdo
+	public final static String GENERAR_NUEVA_FACTURA = "Generar nueva factura";
 	public final static String INVENTARIO = "Inventario";
 	public final static String HISTORIAL = "Historial Facturas";
-	
 	public final static String SALIR = "Salir";
 	
-	
-	private boolean estadoBoton;
-	private JToggleButton clientePE;
 	private JButton generarNuevaFactura;
 	private JButton inventario;
 	private JButton historialFacturas;
@@ -33,36 +30,14 @@ public class PanelBotonesIzq extends JPanel implements ActionListener{
 	public PanelBotonesIzq(InterfazFacturaPrincipal pPrincipal) {
 		principal = pPrincipal;
 		
-		setLayout(new GridLayout(9,1));
-		
+		setLayout(new GridLayout(7,1));
 		//-----------------------------------------------------------------------
 		//Interruptores de prueba
 		/*add( new JSwitchBox( "on", "off" ));
 		SwitchButton ts = new SwitchButton();
 		add(ts);*/
 		//-----------------------------------------------------------------------
-		clientePE = new JToggleButton("Cliente empresa");
-		add(clientePE);
-
-		clientePE.addItemListener(new ItemListener() {
-
-			public void itemStateChanged(ItemEvent itemEvent) {
-				int estado = itemEvent.getStateChange();
-				if(estado == ItemEvent.SELECTED){
-					clientePE.setText("Cliente particular");
-					clientePE.setBackground(Color.decode("#49FF33"));
-					estadoBoton = true;
-				} else {
-					clientePE.setText("Cliente empresa");
-					clientePE.setBackground(Color.decode("#DC76FC"));
-					estadoBoton = false;
-				}
-			}
-		});
-		//-----------------------------------------------------------------------
-		add(new JLabel());
-		//-----------------------------------------------------------------------
-		generarNuevaFactura = new JButton("Generar nueva factura");
+		generarNuevaFactura = new JButton(GENERAR_NUEVA_FACTURA);
 		generarNuevaFactura.setBackground(Color.decode("#27FCE5"));
 		generarNuevaFactura.addActionListener(this);
 		add(generarNuevaFactura);
@@ -88,21 +63,24 @@ public class PanelBotonesIzq extends JPanel implements ActionListener{
 		salir.addActionListener(this);
 		add(salir);
 	}
-	public boolean getEstadoBoton() {
-		return estadoBoton;
-	}
+	
 	public void actionPerformed(ActionEvent e) {
-
 		String comando = e.getActionCommand( );
 
 		if( comando.equals(INVENTARIO) )
 		{
 			Inventario frame = new Inventario(principal);
 			frame.setVisible(true);
+			
+		}else if(comando.equals(GENERAR_NUEVA_FACTURA) ) {
+			
+			principal.generarNuevaFactura();
+			
 		}else if( comando.equals(HISTORIAL) )
 		{
 			InterfazHistorialFac frame2 = new InterfazHistorialFac(principal);
 			frame2.setVisible(true);
+			
 		}else if(comando.equals(SALIR)) {
 			System.exit(0);
 			//Salir

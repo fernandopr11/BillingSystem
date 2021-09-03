@@ -60,4 +60,26 @@ public class InterfazFacturaPrincipal extends JFrame{
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Sistema de facturacion", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	//Metodos funcionales
+	public void agregarProducto() {
+		
+	}
+	
+	public void resetearDatos() {
+		
+	}
+	
+	public void borrarDato() {
+		
+	}
+	
+	public void generarFactura() {
+		
+	}
+	
+	public void generarNuevaFactura() {
+		
+	}	
+	
 }

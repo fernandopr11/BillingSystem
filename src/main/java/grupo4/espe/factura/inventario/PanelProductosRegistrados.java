@@ -149,26 +149,16 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 	}
 
 	public void actionPerformed(ActionEvent evento) {
-		// TODO Auto-generated method stub
-		
-		
 		String comando = evento.getActionCommand();
-		
-		if(comando.equals(ACTUALIZAR)) {
-			
-			
-			
-		} else if (comando.equals(ELIMINAR_PRODUCTO)) {
-			
-			
-			
-			
-		} else if (comando.equals(ELIMINAR_TODO)) {
-			
-			
-			
-		}
 
+		if(comando.equals(ACTUALIZAR)) {			
+			principal.actualizarProducto();
+		} else if (comando.equals(ELIMINAR_PRODUCTO)) {
+			principal.eliminarProducto();	
+
+		} else if (comando.equals(ELIMINAR_TODO)) {		
+			principal.eliminarTodo();	
+		}
 	}
 
 }
