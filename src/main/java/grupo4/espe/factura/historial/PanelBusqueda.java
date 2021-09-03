@@ -57,7 +57,7 @@ public class PanelBusqueda extends JPanel  implements ActionListener{
 
 		//Nombre de columnas
 		String[] nombreDeColumnas = {"#FACT", "FECHA", "CLIENTE", 
-				"SUBTOTAL", "TOTAL"
+				"TIP. CLIENTE", "TOTAL"
 		};
 		//Crea un modelo de tabla
 		model = new DefaultTableModel(null, nombreDeColumnas);

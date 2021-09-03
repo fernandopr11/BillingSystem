@@ -30,12 +30,6 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	// -----------------------------------------
 
 	/*
-	 * Etiqueta y zona de texto para el nombre
-	 */
-	private JTextField txtNombre;
-	private JLabel labNombre;
-
-	/*
 	 * Etiqueta y zona de texto para el codigo
 	 */
 	private JTextField txtCodigo;
@@ -82,11 +76,6 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		setBorder(border);
 
 		// Creacion de las etiquetas y zonas de texto
-
-		labNombre = new JLabel("Nombre");
-		txtNombre = new JTextField();
-		txtNombre.setColumns(10);
-
 		labDescripcionP = new JLabel("Descripcion");
 		txtDescripcion = new JTextField();
 		txtDescripcion.setColumns(10);
@@ -121,8 +110,6 @@ public class PanelDProductos extends JPanel implements ActionListener {
 
 		add(labCodigo);
 		add(txtCodigo);
-		add(labNombre);
-		add(txtNombre);
 		add(labDescripcionP);
 		add(txtDescripcion);
 		add(labPrecio);
