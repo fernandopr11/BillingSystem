@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import grupo4.espe.factura.principal.InterfazFacturaPrincipal;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
@@ -49,20 +51,16 @@ public class Inventario extends JFrame {
 	 */
 
 	private JPanel contentPane;
-	
-	
+
 	/*
 	 * Representa la interfaz principal de la factura
 	 */
 	private InterfazFacturaPrincipal principal;
 
 
-
-	/**
-	 * Create the frame.
-	 */
+	//Constructor para inicializar la interfaz
 	public Inventario(InterfazFacturaPrincipal pPrincipal) {
-		
+
 		principal = pPrincipal;
 		principal.setVisible(false);
 
@@ -70,7 +68,7 @@ public class Inventario extends JFrame {
 		setTitle("Inventario TecnoSmart");
 		setSize(793, 561);
 		setLocationRelativeTo(null);
-		setResizable(true);
+		setResizable(false);
 
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -79,7 +77,7 @@ public class Inventario extends JFrame {
 		// Instancia de los paneles
 		panelNavegacion = new PanelNav(this);
 		panelDatosProductos = new PanelDProductos(this);
-		panelProductosRegistrados = new PanelProductosRegistrados(this);
+		panelProductosRegistrados = new PanelProductosRegistrados(panelDatosProductos);
 
 		// Organizar el panel mediante border layout
 		contentPane.add(panelNavegacion, BorderLayout.NORTH);
@@ -87,23 +85,7 @@ public class Inventario extends JFrame {
 		contentPane.add(panelProductosRegistrados, BorderLayout.CENTER);
 
 	}
-	//Implementacion de metodos funcionales
+
 	
-	public void guardarProducto() {
-		
-	}
-	
-	public void actualizarProducto() {
-		
-	}
-	
-	public void eliminarProducto() {
-		
-	}
-	
-	public void eliminarTodo() {
-		
-	}
+
 }
-
-

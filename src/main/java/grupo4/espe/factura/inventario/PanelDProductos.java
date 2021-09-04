@@ -10,8 +10,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class PanelDProductos extends JPanel implements ActionListener {
 
@@ -20,10 +22,10 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	// -----------------------------------------
 
 	/*
-	 * Comando para guardar un productos
+	 * Comando para para limpiar los campos de los productos
 	 */
 
-	private final static String GUARDAR = "Guardar";
+	private final static String LIMPIAR_CAMPOS = "Limpoiar";
 
 	// -----------------------------------------
 	// Atributos
@@ -54,9 +56,9 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	private JLabel labCantidad;
 
 	/*
-	 * Boton para guardar el producto
+	 * Boton para limpiar los campos
 	 */
-	private JButton btnGuardar;
+	private JButton btnLimpiarCampos;
 
 	/*
 	 * Interfaz principal de la aplicacion
@@ -70,7 +72,7 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		principal = pPrincipal;
 
 		// Caracteristicas del panel
-		setLayout(new GridLayout(6, 2, 5, 30));
+		setLayout(new GridLayout(5, 2, 5, 50));
 		TitledBorder border = BorderFactory.createTitledBorder("Panel Datos Productos ");
 		border.setTitleColor(Color.blue);
 		setBorder(border);
@@ -92,19 +94,17 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		txtCantidad = new JTextField();
 		txtCantidad.setColumns(10);
 
-		/*
-		 * Se crea el boton guardar el producto y se le asocia el comando respectivo
-		 */
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.setBackground(Color.decode("#6CC3E3"));
-		btnGuardar.setActionCommand(GUARDAR);
+		// Configuracion del boton para limpiar los campos
+		btnLimpiarCampos = new JButton("Limpiar Campos");
+		btnLimpiarCampos.setBackground(Color.decode("#A3A3F1"));
+		btnLimpiarCampos.setActionCommand(LIMPIAR_CAMPOS);
 
 		/*
 		 * Llamada al metodo addActionListener sobre los botones, el panel es encargado
 		 * de atender a los eventos
 		 */
 
-		btnGuardar.addActionListener(this);
+		btnLimpiarCampos.addActionListener(this);
 
 		// Se agregan los elementos al panel
 
@@ -116,24 +116,102 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		add(txtPrecio);
 		add(labCantidad);
 		add(txtCantidad);
-		add(btnGuardar);
+		add(btnLimpiarCampos);
+
+	}
+
+	// Metodos funcionales
+
+	/*
+	 * Metodo que devuelve el codigo del producto
+	 */
+
+	public String darCodigo() {
+
+		String rta = txtCodigo.getText();
+
+		return rta;
 
 	}
 
 	/*
-	 * Metodo actionPerformed que se ejecuta cada vez que se genera un evento como
-	 * consecuencia de una accion al usuario
-	 * 
-	 * @param evento Evento generado
+	 * Metodo que devuelve la descripcion del producto
 	 */
-	public void actionPerformed(ActionEvent evento) {
 
+	public String darDescripcion() {
+
+		String rta = txtDescripcion.getText();
+
+		return rta;
+
+	}
+
+	/*
+	 * Metodo que devuelve el precio del producto
+	 */
+
+	public String darPrecio() {
+
+		String rta = txtPrecio.getText();
+
+		return rta;
+
+	}
+
+	/*
+	 * Metodo que devuelve la cantidad del producto
+	 */
+
+	public String darCantidad() {
+
+		String rta = txtCantidad.getText();
+
+		return rta;
+
+	}
+
+	/*
+	 * 
+	 * Metodo para limpiar los campos del producto
+	 * 
+	 */
+
+	public void limpiarCampos() {
+
+		txtCodigo.setText("");
+		txtDescripcion.setText("");
+		txtPrecio.setText("");
+		txtCantidad.setText("");
+	}
+
+	public JTextField getTxtCodigo() {
+
+		return txtCodigo;
+	}
+
+	public JTextField getTxtDescripcion() {
+		return txtDescripcion;
+	}
+
+	public JTextField getTxtPrecio() {
+		return txtPrecio;
+	}
+
+	public JTextField getTxtCantidad() {
+		return txtCantidad;
+	}
+
+	public void actionPerformed(ActionEvent evento) {
+		
 		String comando = evento.getActionCommand();
 		
-		if(comando.equals(GUARDAR)) {
-			principal.guardarProducto();
+		if(comando.equals(LIMPIAR_CAMPOS)) {
+			
+		 this.limpiarCampos();	
+			
+			
 		}
-
+		
 	}
 
 }

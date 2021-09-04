@@ -5,11 +5,15 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +22,12 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 	// -----------------------------------------
 	// Constantes
 	// -----------------------------------------
+
+	/*
+	 * Comando para el boton guardar
+	 */
+
+	private final static String GUARDAR = "Guardar";
 
 	/*
 	 * Comando para el boton actualizar
@@ -39,6 +49,12 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 	// -----------------------------------------
 	// Atributos
 	// -----------------------------------------
+
+	/*
+	 * Boton para guardar los productos
+	 */
+
+	private JButton btnGuardar;
 
 	/*
 	 * Boton para actualizar los datos del los productos
@@ -85,11 +101,33 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 	 */
 	private Inventario principal;
 
-	// Constructor para iniciar el panel
-	public PanelProductosRegistrados(Inventario pPrincipal) {
+	/*
+	 * Objeto para agregar las filas
+	 */
+	private Object[] row;
 
-		// Asociacion con la interfaz principal
-		principal = pPrincipal;
+	/*
+	 * Panel que contiene los datos del producto
+	 */
+
+	private PanelDProductos panelDatos;
+
+	/*
+	 * Indice de la fila del productos
+	 */
+
+	private int indice;
+
+	private JTextField txtCodigo;
+	private JTextField txtDescripcion;
+	private JTextField txtPrecio;
+	private JTextField txtCantidad;
+
+	// Constructor para iniciar el panel
+	public PanelProductosRegistrados(PanelDProductos pPanel) {
+
+		// Panel que contiene los datos del producto
+		panelDatos = pPanel;
 
 		// Caracteristicas del panel
 		setBorder(new TitledBorder(null, "Productos Almacenados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -103,6 +141,13 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 		/*
 		 * Se crea el botones y se les asocia el comando respectivo
 		 */
+
+		// Configuracion del boton guardar
+
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setBackground(Color.decode("#F4A79B"));
+		btnGuardar.setActionCommand(GUARDAR);
+		panelBotones.add(btnGuardar);
 
 		// Configuracion del boton actualizar
 
@@ -128,6 +173,7 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 		 * de atender a los eventos
 		 */
 
+		btnGuardar.addActionListener(this);
 		btnActualizar.addActionListener(this);
 		btnEliminar.addActionListener(this);
 		btnEliminarTodo.addActionListener(this);
@@ -138,26 +184,98 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 		add(scrollPane, BorderLayout.CENTER);
 
 		tablaProductos = new JTable();
-		tablaProductos.setBackground(new Color(176, 196, 22));
 		model = new DefaultTableModel();
-		Object[] colum = { "Codigo", "Nombre", "Descripcion", "Precio", "Cantidad" };
-		Object[] row = new Object[0];
+		Object[] colum = { "Codigo", "Descripcion", "Precio", "Cantidad" };
+		row = new Object[4];
 		model.setColumnIdentifiers(colum);
 		tablaProductos.setModel(model);
 		scrollPane.setViewportView(tablaProductos);
+
+		// MouseListener agregado a la tabla de los productos
+
+		tablaProductos.addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent arg0) {
+
+				indice = tablaProductos.getSelectedRow();
+
+				panelDatos.getTxtCodigo().setText(model.getValueAt(indice, 0).toString());
+				panelDatos.getTxtDescripcion().setText(model.getValueAt(indice, 1).toString());
+				panelDatos.getTxtPrecio().setText(model.getValueAt(indice, 2).toString());
+				panelDatos.getTxtCantidad().setText(model.getValueAt(indice, 3).toString());
+
+			}
+
+		});
 
 	}
 
 	public void actionPerformed(ActionEvent evento) {
 		String comando = evento.getActionCommand();
 
-		if(comando.equals(ACTUALIZAR)) {			
-			principal.actualizarProducto();
-		} else if (comando.equals(ELIMINAR_PRODUCTO)) {
-			principal.eliminarProducto();	
+		if (comando.equals(ACTUALIZAR)) {
 
-		} else if (comando.equals(ELIMINAR_TODO)) {		
-			principal.eliminarTodo();	
+			indice = tablaProductos.getSelectedRow();
+
+			if (indice >= 0) {
+
+				model.setValueAt(panelDatos.darCodigo(), indice, 0);
+				model.setValueAt(panelDatos.darDescripcion(), indice, 1);
+				model.setValueAt(panelDatos.darPrecio(), indice, 2);
+				model.setValueAt(panelDatos.darCantidad(), indice, 3);
+
+				JOptionPane.showMessageDialog(null, "Producto actualizado satisfactoriamente");
+
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Selecciona un producto para actualizar", comando,
+						JOptionPane.ERROR_MESSAGE);
+
+			}
+
+		} else if (comando.equals(ELIMINAR_PRODUCTO)) {
+
+			indice = tablaProductos.getSelectedRow();
+
+			if (indice >= 0) {
+
+				model.removeRow(indice);
+				JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Selecciona un producto", comando, JOptionPane.ERROR_MESSAGE);
+			}
+
+		} else if (comando.equals(ELIMINAR_TODO)) {
+
+			model.setRowCount(0);
+
+			JOptionPane.showMessageDialog(null, "Todos los productos han sido eliminados");
+
+		} else if (comando.equals(GUARDAR)) {
+
+			if (panelDatos.darCodigo().equals("") || panelDatos.darDescripcion().equals("")
+					|| panelDatos.darPrecio().equals("") || panelDatos.darCantidad().equals("")) {
+
+				JOptionPane.showMessageDialog(null, "Ingresar todos los datos de los productos", comando,
+						JOptionPane.ERROR_MESSAGE);
+
+			} else {
+
+				row[0] = panelDatos.darCodigo();
+				row[1] = panelDatos.darDescripcion();
+				row[2] = panelDatos.darPrecio();
+				row[3] = panelDatos.darCantidad();
+
+				model.addRow(row);
+
+				panelDatos.limpiarCampos();
+
+				JOptionPane.showMessageDialog(null, "Productos almacenados existosamente");
+
+			}
+
 		}
 	}
 
