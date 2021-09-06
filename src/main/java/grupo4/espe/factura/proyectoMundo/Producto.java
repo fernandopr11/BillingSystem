@@ -4,7 +4,7 @@ import com.mongodb.BasicDBObject;
 
 public class Producto {
 
-//Atributos
+	// Atributos
 	/*
 	 * Codigo del producto
 	 */
@@ -23,46 +23,32 @@ public class Producto {
 	private int cantidad;
 
 	public Producto(String codigo, String descripcion, double precio, int cantidad) {
+
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.cantidad = cantidad;
 	}
 	
-	/*
-     * Constructor para transforma un objeto de MongoDb a un Objeto Java
-     * 
-     * @param dbOjectCliente
-     */
-    public Producto(BasicDBObject dbObjectProducto) {
+	public Producto() {
+		
+		
+	}
 
-        // Obtiene el valor del atributo codigo mediante el metodo getString
-        this.codigo = dbObjectProducto.getString("codigo");
-
-        // Obtiene el valor del atributo descripcion mediante el metodo getString
-        this.descripcion = dbObjectProducto.getString("descripcion");
-        
-      // Obtiene el valor del atributo precio mediante el metodo getString
-        this.precio = dbObjectProducto.getDouble("precio");
-        
-     // Obtiene el valor del atributo cantidad mediante el metodo getString
-        this.cantidad = dbObjectProducto.getInt("cantidad");
-    }
-    
-    public BasicDBObject toDBObjectProducto() {
+	public BasicDBObject toDBObjectProducto() {
 
 		// Creamos una instancia BasicDBObject
 		BasicDBObject dBObjectProducto = new BasicDBObject();
 
 		// Agrega el valor del atributo nombre al objeto de mongoDB
 		dBObjectProducto.append("codigo", this.getCodigo());
-		
+
 		// Agrega el valor del atributo precio al objeto de mongoDB
 		dBObjectProducto.append("descripcion", this.getDescripcion());
-		
+
 		// Agrega el valor del atributo precio al objeto de mongoDB
 		dBObjectProducto.append("precio", this.getPrecio());
-				
+
 		// Agrega el valor del atributo precio al objeto de mongoDB
 		dBObjectProducto.append("cantidad", this.getCantidad());
 		return dBObjectProducto;
@@ -100,5 +86,10 @@ public class Producto {
 		this.cantidad = cantidad;
 	}
 
-    
+	@Override
+	public String toString() {
+		return "Producto [codigo=" + this.codigo + ", descripcion=" + this.descripcion + ", precio=" + this.precio
+				+ ", cantidad=" + this.cantidad + "]";
+	}
+
 }

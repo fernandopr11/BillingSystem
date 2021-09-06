@@ -5,15 +5,20 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import grupo4.espe.factura.proyectoMundo.Producto;
+import grupo4.espe.factura.proyectoMundo.TiendaTecnoSmart;
 
 public class PanelDProductos extends JPanel implements ActionListener {
 
@@ -25,7 +30,13 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	 * Comando para para limpiar los campos de los productos
 	 */
 
-	private final static String LIMPIAR_CAMPOS = "Limpoiar";
+	private final static String LIMPIAR_CAMPOS = "Limpiar";
+
+	/*
+	 * Comando para guardar los productos en mongoDB
+	 */
+
+	private final static String GUARDAR_MONGO = "Guardar mongo";
 
 	// -----------------------------------------
 	// Atributos
@@ -61,15 +72,48 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	private JButton btnLimpiarCampos;
 
 	/*
+	 * Atributo que presenta la validacion de los campos
+	 */
+	private boolean control;
+
+	/*
 	 * Interfaz principal de la aplicacion
 	 */
 	private Inventario principal;
 
+	/*
+	 * Array list de los productos
+	 */
+
+	private ArrayList<Producto> productos;
+
+	/*
+	 * Atributo que repesenta a los productos
+	 */
+	private Producto product;
+
+	/*
+	 * Atributo que representa la tienda
+	 */
+	private TiendaTecnoSmart pTienda;
+
 	// Constructor para iniciar el panel
-	public PanelDProductos(Inventario pPrincipal) {
+	public PanelDProductos(Inventario pPrincipal, TiendaTecnoSmart myTienda, Boolean pControl) {
 
 		// Asosiacion con la interfaz principal
 		principal = pPrincipal;
+
+		// Inicializacion de la tienda
+		pTienda = myTienda;
+
+		// Inicializacion de los productos
+		product = new Producto();
+		
+		control = pControl;
+
+		// Inicializacion del arrayList de los productos
+		productos = new ArrayList<Producto>();
+		
 
 		// Caracteristicas del panel
 		setLayout(new GridLayout(5, 2, 5, 50));
@@ -105,7 +149,6 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		 */
 
 		btnLimpiarCampos.addActionListener(this);
-
 		// Se agregan los elementos al panel
 
 		add(labCodigo);
@@ -117,7 +160,6 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		add(labCantidad);
 		add(txtCantidad);
 		add(btnLimpiarCampos);
-
 	}
 
 	// Metodos funcionales
@@ -200,18 +242,115 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	public JTextField getTxtCantidad() {
 		return txtCantidad;
 	}
+	
+	public boolean isControl() {
+		return control;
+	}
+
+	public void setControl(boolean control) {
+		this.control = control;
+	}
+
+	public static String getLimpiarCampos() {
+		return LIMPIAR_CAMPOS;
+	}
+
+	public static String getGuardarMongo() {
+		return GUARDAR_MONGO;
+	}
+
+	public JLabel getLabCodigo() {
+		return labCodigo;
+	}
+
+	public JLabel getLabDescripcionP() {
+		return labDescripcionP;
+	}
+
+	public JLabel getLabPrecio() {
+		return labPrecio;
+	}
+
+	public JLabel getLabCantidad() {
+		return labCantidad;
+	}
+
+	public JButton getBtnLimpiarCampos() {
+		return btnLimpiarCampos;
+	}
+
+	public Inventario getPrincipal() {
+		return principal;
+	}
+
+	public ArrayList<Producto> getProductos() {
+		return productos;
+	}
+
+	public Producto getProduct() {
+		return product;
+	}
+
+	public TiendaTecnoSmart getpTienda() {
+		return pTienda;
+	}
 
 	public void actionPerformed(ActionEvent evento) {
-		
+
 		String comando = evento.getActionCommand();
-		
-		if(comando.equals(LIMPIAR_CAMPOS)) {
-			
-		 this.limpiarCampos();	
-			
-			
+
+		if (comando.equals(LIMPIAR_CAMPOS)) {
+
+			this.limpiarCampos();
+
 		}
-		
+
 	}
+
+	public void guardarMongoDatosProducto() {
+
+		// Obtener el valor de los campos de texto
+		String codigo = txtCodigo.getText().toString().trim();
+		String descripcion = txtDescripcion.getText().toString().trim();
+		String precio = txtPrecio.getText().toString().trim();
+		String cantidad = txtCantidad.getText().toString().trim();
+
+		control = true;
+		
+		// Realizar las validaciones de los datos
+
+		double precio_p = 0;
+
+		int cantidad_p = 0;
+
+		if (control) {
+
+			try {
+
+				precio_p = Double.parseDouble(precio);
+				cantidad_p = Integer.parseInt(cantidad);
+
+
+			} catch (Exception e) {
+
+				control = false;
+				JOptionPane.showMessageDialog(this, "El precio de venta o la cantidad debe ser numerica", "Error",
+						JOptionPane.ERROR_MESSAGE);
+
+			}
+
+		}
+	
+		if (control) {
+
+			pTienda.agregarProducto(codigo, descripcion, precio_p, cantidad_p);
+			JOptionPane.showMessageDialog(null, "Productos almacenados existosamente en Base de Datos");
+			principal.guardarMongo();
+
+		}
+
+	}
+	
+	
 
 }

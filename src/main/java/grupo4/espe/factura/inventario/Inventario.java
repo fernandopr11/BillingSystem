@@ -11,11 +11,14 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import grupo4.espe.factura.principal.InterfazFacturaPrincipal;
+import grupo4.espe.factura.proyectoMundo.Producto;
+import grupo4.espe.factura.proyectoMundo.TiendaTecnoSmart;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -56,6 +59,13 @@ public class Inventario extends JFrame {
 	 * Representa la interfaz principal de la factura
 	 */
 	private InterfazFacturaPrincipal principal;
+	
+	/*
+	 * Representa la tienda 
+	 */
+	private TiendaTecnoSmart pTienda;
+	
+
 
 
 	//Constructor para inicializar la interfaz
@@ -63,7 +73,10 @@ public class Inventario extends JFrame {
 
 		principal = pPrincipal;
 		principal.setVisible(false);
-
+		
+		//Se inicializa la tienda
+		pTienda = new TiendaTecnoSmart();
+		
 		// Caracteristicas del panel
 		setTitle("Inventario TecnoSmart");
 		setSize(793, 561);
@@ -76,7 +89,7 @@ public class Inventario extends JFrame {
 
 		// Instancia de los paneles
 		panelNavegacion = new PanelNav(this);
-		panelDatosProductos = new PanelDProductos(this);
+		panelDatosProductos = new PanelDProductos(this, pTienda, true);
 		panelProductosRegistrados = new PanelProductosRegistrados(panelDatosProductos);
 
 		// Organizar el panel mediante border layout
@@ -84,6 +97,14 @@ public class Inventario extends JFrame {
 		contentPane.add(panelDatosProductos, BorderLayout.WEST);
 		contentPane.add(panelProductosRegistrados, BorderLayout.CENTER);
 
+	}
+
+
+	public void guardarMongo() {
+		
+		pTienda.grabarMongoDB_Paucar_Fernando();
+		
+		
 	}
 
 	

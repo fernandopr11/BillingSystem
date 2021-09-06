@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import grupo4.espe.factura.principal.PanelAgregaDatosFactura;
+
 public class PanelProductosRegistrados extends JPanel implements ActionListener {
 
 	// -----------------------------------------
@@ -268,11 +270,15 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 				row[2] = panelDatos.darPrecio();
 				row[3] = panelDatos.darCantidad();
 
-				model.addRow(row);
+				if (panelDatos.isControl() == true) {
 
-				panelDatos.limpiarCampos();
+					panelDatos.guardarMongoDatosProducto();
 
-				JOptionPane.showMessageDialog(null, "Productos almacenados existosamente");
+					model.addRow(row);
+
+					panelDatos.limpiarCampos();
+
+				}
 
 			}
 
