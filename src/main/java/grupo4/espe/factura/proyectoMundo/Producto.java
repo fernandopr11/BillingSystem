@@ -4,7 +4,10 @@ import com.mongodb.BasicDBObject;
 
 public class Producto {
 
+	// -------------------------------------
 	// Atributos
+	// ------------------------------------
+
 	/*
 	 * Codigo del producto
 	 */
@@ -22,6 +25,17 @@ public class Producto {
 	 */
 	private int cantidad;
 
+	/*
+	 * Atributo que representa el indice del primer producto
+	 */
+
+	private int indicePrimerProducto;
+
+	/*
+	 * Atributo que representa el ultimo producto agregado a la factura
+	 */
+	private int ultimoIndice;
+
 	public Producto(String codigo, String descripcion, double precio, int cantidad) {
 
 		this.codigo = codigo;
@@ -29,10 +43,11 @@ public class Producto {
 		this.precio = precio;
 		this.cantidad = cantidad;
 	}
-	
+
 	public Producto() {
-		
-		
+
+		this.indicePrimerProducto = ++ultimoIndice;
+
 	}
 
 	public BasicDBObject toDBObjectProducto() {
@@ -84,6 +99,12 @@ public class Producto {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public Double calcularImporte() {
+
+		return this.cantidad * this.precio;
+
 	}
 
 	@Override

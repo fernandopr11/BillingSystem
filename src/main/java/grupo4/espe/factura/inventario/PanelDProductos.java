@@ -108,12 +108,11 @@ public class PanelDProductos extends JPanel implements ActionListener {
 
 		// Inicializacion de los productos
 		product = new Producto();
-		
+
 		control = pControl;
 
 		// Inicializacion del arrayList de los productos
 		productos = new ArrayList<Producto>();
-		
 
 		// Caracteristicas del panel
 		setLayout(new GridLayout(5, 2, 5, 50));
@@ -242,7 +241,7 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	public JTextField getTxtCantidad() {
 		return txtCantidad;
 	}
-	
+
 	public boolean isControl() {
 		return control;
 	}
@@ -316,7 +315,7 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		String cantidad = txtCantidad.getText().toString().trim();
 
 		control = true;
-		
+
 		// Realizar las validaciones de los datos
 
 		double precio_p = 0;
@@ -330,7 +329,6 @@ public class PanelDProductos extends JPanel implements ActionListener {
 				precio_p = Double.parseDouble(precio);
 				cantidad_p = Integer.parseInt(cantidad);
 
-
 			} catch (Exception e) {
 
 				control = false;
@@ -340,7 +338,7 @@ public class PanelDProductos extends JPanel implements ActionListener {
 			}
 
 		}
-	
+
 		if (control) {
 
 			pTienda.agregarProducto(codigo, descripcion, precio_p, cantidad_p);
@@ -350,7 +348,5 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		}
 
 	}
-	
-	
 
 }

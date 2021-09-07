@@ -4,10 +4,10 @@ import com.mongodb.BasicDBObject;
 
 public class Cliente {
 
-	//Atributos
-	 /*
-	  * Cedula o RUC de cliente
-	  */
+	// Atributos
+	/*
+	 * Cedula o RUC de cliente
+	 */
 	private String cedula;
 	/*
 	 * Nombre de cliente
@@ -25,7 +25,7 @@ public class Cliente {
 	 * Direccion del cliente
 	 */
 	private String direccion;
-	
+
 	public Cliente(String cedula, String nombre, int telefono, String correo, String direccion) {
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -33,31 +33,7 @@ public class Cliente {
 		this.correo = correo;
 		this.direccion = direccion;
 	}
-	
-	/*
-	 * Constructor para transforma un objeto de MongoDb a un Objeto Java
-	 * 
-	 * @param dbOjectCliente
-	 */
 
-	public Cliente(BasicDBObject dbObjectCliente) {
-
-		// Obtiene el valor del atributo cedula mediante el metodo getString
-		this.cedula = dbObjectCliente.getString("cedula");
-		
-		// Obtiene el valor del atributo nombre mediante el metodo getString
-		this.nombre = dbObjectCliente.getString("nombre");
-		
-		// Obtiene el valor del atributo telefono mediante el metodo getString
-		this.telefono = dbObjectCliente.getInt("telefono");
-
-		// Obtiene el valor del atributo correo mediante el metodo getString
-		this.correo = dbObjectCliente.getString("correo");
-		
-		// Obtiene el valor del atributo direccion mediante el metodo getString
-		this.direccion = dbObjectCliente.getString("direccion");
-	}
-	
 	/*
 	 * Metodo utlizado para mostrar, agregar los atributos de la clase cliente al
 	 * objeto mongoDB
@@ -68,10 +44,10 @@ public class Cliente {
 
 		// Creamos una instancia BasicDBObject
 		BasicDBObject dBObjectCliente = new BasicDBObject();
-		
+
 		// Agrega el valor del atributo cedula al objeto de mongoDB
 		dBObjectCliente.append("cedula", this.getCedula());
-		
+
 		// Agrega el valor del atributo nombre al objeto de mongoDB
 		dBObjectCliente.append("nombre", this.getNombre());
 
@@ -87,7 +63,7 @@ public class Cliente {
 		// Retorna el objeto mongo db
 		return dBObjectCliente;
 	}
-	
+
 	public String getCedula() {
 		return cedula;
 	}
@@ -127,7 +103,11 @@ public class Cliente {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Cliente [cedula=" + cedula + ", nombre=" + nombre + ", telefono=" + telefono + ", correo=" + correo
+				+ ", direccion=" + direccion + "]";
+	}
 
 }

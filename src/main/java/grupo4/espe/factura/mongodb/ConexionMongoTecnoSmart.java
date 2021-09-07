@@ -1,4 +1,4 @@
-package grupo4.espe.factura.proyectoMundo;
+package grupo4.espe.factura.mongodb;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
+
+import grupo4.espe.factura.proyectoMundo.Producto;
 
 public class ConexionMongoTecnoSmart {
 

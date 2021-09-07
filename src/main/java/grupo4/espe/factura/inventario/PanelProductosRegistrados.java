@@ -277,6 +277,9 @@ public class PanelProductosRegistrados extends JPanel implements ActionListener 
 					model.addRow(row);
 
 					panelDatos.limpiarCampos();
+					
+					
+					
 
 				}
 

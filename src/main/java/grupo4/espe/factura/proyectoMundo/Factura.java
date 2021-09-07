@@ -1,62 +1,78 @@
 package grupo4.espe.factura.proyectoMundo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Factura {
-
-	//Atributos
 
 	/*
 	 * Fecha en que se emitio la factura
 	 */
 	private Date fecha;
-	
+
 	/*
 	 * Numero de factura
 	 */
 	private int numeroFactura;
-	
+
 	/*
 	 * Subtotal de factura
 	 */
-	private int subtotal;
-	
+	private Double subtotal;
+
 	/*
 	 * Descuento
 	 */
-	private int descuento;
-	
+	private Double descuento;
+
 	/*
 	 * Sub total con descuento
 	 */
-	private int subDescuento;
-	
+	private Double subDescuento;
+
+	/*
+	 * Representa al cliente
+	 */
+
+	private Cliente cliente;
+
+	/*
+	 * ArrayList de los productos
+	 */
+
+	private ArrayList<Producto> productos;
+
 	/*
 	 * IVA 12%
 	 */
 
-	private int iva;
-	
+	private static Double iva = 0.12;
+
+	/*
+	 * Atributo que representa el valor del iva
+	 */
+
+	private double totalImpuesto;
+
 	/*
 	 * Total a pagar
 	 */
-	private int totalPagar;
-	
-	public Factura(Date fecha, int numeroFactura, int subtotal, int descuento, int subDescuento, int iva,
-			int totalPagar) {
+	private Double totalPagar;
+
+	public Factura(Date fecha, int numeroFactura, Double subtotal, Double descuento, Double subDescuento,
+			Double totalPagar, Cliente pCliente, ArrayList<Producto> pProducto, Double pImpuesto) {
+		
 		this.fecha = fecha;
 		this.numeroFactura = numeroFactura;
 		this.subtotal = subtotal;
 		this.descuento = descuento;
 		this.subDescuento = subDescuento;
-		this.iva = iva;
 		this.totalPagar = totalPagar;
+		this.cliente = pCliente;
+		this.totalImpuesto = pImpuesto;
+		this.productos = pProducto;
 	}
 
-	
-	
-	
-	
 	public Date getFecha() {
 		return fecha;
 	}
@@ -65,23 +81,19 @@ public class Factura {
 		return numeroFactura;
 	}
 
-	public int getSubtotal() {
+	public Double getSubtotal() {
 		return subtotal;
 	}
 
-	public int getDescuento() {
+	public Double getDescuento() {
 		return descuento;
 	}
 
-	public int getSubDescuento() {
+	public Double getSubDescuento() {
 		return subDescuento;
 	}
 
-	public int getIva() {
-		return iva;
-	}
-
-	public int getTotalPagar() {
+	public Double getTotalPagar() {
 		return totalPagar;
 	}
 
@@ -93,25 +105,66 @@ public class Factura {
 		this.numeroFactura = numeroFactura;
 	}
 
-	public void setSubtotal(int subtotal) {
+	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public void setDescuento(int descuento) {
+	public void setDescuento(Double descuento) {
 		this.descuento = descuento;
 	}
 
-	public void setSubDescuento(int subDescuento) {
+	public void setSubDescuento(Double subDescuento) {
 		this.subDescuento = subDescuento;
 	}
 
-	public void setIva(int iva) {
+	public void setIva(Double iva) {
 		this.iva = iva;
 	}
 
-	public void setTotalPagar(int totalPagar) {
+	public void setTotalPagar(Double totalPagar) {
 		this.totalPagar = totalPagar;
 	}
-	
-	
+
+	public Double calcularSubtotal() {
+
+		for (Producto produc : productos) {
+
+			subtotal = produc.calcularImporte();
+
+		}
+
+		return subtotal;
+
+	}
+
+	public Double calcularIva() {
+
+		for (Producto produc : productos) {
+
+			subtotal = produc.calcularImporte();
+
+			totalImpuesto = subtotal * iva;
+
+		}
+
+		return totalImpuesto;
+
+	}
+
+	public Double calcularTotal() {
+
+		for (Producto produc : productos) {
+
+			subtotal = produc.calcularImporte();
+
+			totalImpuesto = subtotal * iva;
+
+			totalPagar = subtotal + iva;
+
+		}
+
+		return totalPagar;
+
+	}
+
 }
