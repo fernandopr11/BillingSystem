@@ -6,9 +6,14 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,6 +21,18 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Document;
+
+import org.bson.BasicBSONObject;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+
+import grupo4.espe.factura.mongodb.ConexionMongoTecnoSmart;
+import grupo4.espe.factura.proyectoMundo.Producto;
 
 public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	
@@ -30,6 +47,8 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	private JTextField txtCodigo;
 
 	private JTextField txtCantidad;
+	
+	public final static String AGREGAR_PRODUCTO = "Agregar Producto";
 	
 	//Panel Sur Lista de producto agregados-----------------------------------------------------
 			private JPanel listaProductoFactura;		
@@ -84,7 +103,7 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	     tabla1.add(txtCantidad);
 	  
 	     
-	     bntAgrProducto = new JButton("Agregar Producto");
+	     bntAgrProducto = new JButton(AGREGAR_PRODUCTO);
 	     bntAgrProducto.setBackground(Color.decode("#6CC3E3"));
 	     bntAgrProducto.addActionListener(this);
 	     agrDatosFactura.add(bntAgrProducto, BorderLayout.CENTER);
@@ -151,7 +170,40 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+
+		String comando = e.getActionCommand();
+
+		if (comando.equals(AGREGAR_PRODUCTO)) {
+	
+			if(this.darCodigoTxt().equals("") || this.darCantidadTxt().equals("")) {
+				JOptionPane.showMessageDialog(null, "Ingresar todos los datos necesarios", comando,
+						JOptionPane.ERROR_MESSAGE);
+			}else {
+				
+				try {
+					ConexionMongoTecnoSmart mongo = new ConexionMongoTecnoSmart();
+					DB db = mongo.conectarMongoDB();
+					DBCollection coleccion = db.getCollection("Inventario");
+					
+					String codigo = txtCodigo.getText();
+					mongo.mostrarProducto(coleccion, codigo);
+					
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		}
+	}
+	
+	public String darCodigoTxt() {
+		String cod = txtCodigo.getText();
+		return cod;
+	}
+	
+	public String darCantidadTxt() {
+		String cant = txtCantidad.getText();
+		return cant;
 	}
 }

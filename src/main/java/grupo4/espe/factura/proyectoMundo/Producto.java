@@ -69,6 +69,11 @@ public class Producto {
 		return dBObjectProducto;
 	}
 
+	public Producto(BasicDBObject dBObjectProducto) {
+		this.codigo = dBObjectProducto.getString("codigo");
+		this.descripcion = dBObjectProducto.getString("cescripcion");
+		this.precio = dBObjectProducto.getDouble("precio");
+	}
 	public String getCodigo() {
 		return codigo;
 	}

@@ -4,6 +4,9 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 import grupo4.espe.factura.mongodb.ConexionMongoTecnoSmart;
 
@@ -145,5 +148,7 @@ public class TiendaTecnoSmart {
 		}
 
 	}
+	
+	
 
 }
