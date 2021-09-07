@@ -32,11 +32,6 @@ public class PanelBotonesIzq extends JPanel implements ActionListener{
 		
 		setLayout(new GridLayout(7,1));
 		//-----------------------------------------------------------------------
-		//Interruptores de prueba
-		/*add( new JSwitchBox( "on", "off" ));
-		SwitchButton ts = new SwitchButton();
-		add(ts);*/
-		//-----------------------------------------------------------------------
 		generarNuevaFactura = new JButton(GENERAR_NUEVA_FACTURA);
 		generarNuevaFactura.setBackground(Color.decode("#27FCE5"));
 		generarNuevaFactura.addActionListener(this);

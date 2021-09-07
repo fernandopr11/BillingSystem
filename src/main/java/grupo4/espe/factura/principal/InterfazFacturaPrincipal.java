@@ -14,7 +14,7 @@ public class InterfazFacturaPrincipal extends JFrame{
 	private PanelBotonesIzq panelBotonesIzq;
 	private PanelEncabezado panelEncabezado;
 	private PanelAgregaDatosFactura panelAgregaDatosFactura;
-	private PanelListaProductosFactura panelListaProductosFactura;
+	
 	private PanelBotonesInfFactura panelBotonesInfFactura;
 
 	public InterfazFacturaPrincipal() throws Exception {
@@ -44,11 +44,9 @@ public class InterfazFacturaPrincipal extends JFrame{
 		panelAgregaDatosFactura = new PanelAgregaDatosFactura(this);
 		centro2.add(panelAgregaDatosFactura, BorderLayout.NORTH);
 		
-		panelListaProductosFactura = new PanelListaProductosFactura(this);
-		centro2.add(panelListaProductosFactura, BorderLayout.CENTER);
 		
 		panelBotonesInfFactura = new PanelBotonesInfFactura();
-		centro2.add(panelBotonesInfFactura, BorderLayout.SOUTH);
+		centro2.add(panelBotonesInfFactura, BorderLayout.CENTER);
 	}
 
 

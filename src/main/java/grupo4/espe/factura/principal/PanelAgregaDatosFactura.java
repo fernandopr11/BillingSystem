@@ -30,6 +30,29 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	private JTextField txtCodigo;
 
 	private JTextField txtCantidad;
+	
+	//Panel Sur Lista de producto agregados-----------------------------------------------------
+			private JPanel listaProductoFactura;		
+			// el modelo de tabla, aquí van a estar los datos.
+			 private DefaultTableModel model;
+			// la tabla
+			 private JTable table;
+			 //Elementos de importes totales
+			 
+			 private JLabel labSubtotal;
+			 private JTextField txtSubtotal;
+			 
+			 private JLabel labDescuento;
+			 private JTextField txtDescuento;
+			 
+			 private JLabel labSubDescuento;
+			 private JTextField txtSubDescuento;
+			 
+			 private JLabel labIVA;
+			 private JTextField txtIVA;
+			 
+			 private JLabel labTotal;
+			 private JTextField txtTotal;
 
 	public PanelAgregaDatosFactura(InterfazFacturaPrincipal pPrincipal) {
 		
@@ -64,8 +87,67 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 	     bntAgrProducto = new JButton("Agregar Producto");
 	     bntAgrProducto.setBackground(Color.decode("#6CC3E3"));
 	     bntAgrProducto.addActionListener(this);
-	     agrDatosFactura.add(bntAgrProducto, BorderLayout.SOUTH);
+	     agrDatosFactura.add(bntAgrProducto, BorderLayout.CENTER);
 	    
+	   //Panel Sur Lista de producto agregados -------------------------------------------------------------------------------
+	     listaProductoFactura = new JPanel();
+	     listaProductoFactura.setLayout(new BorderLayout());
+	     agrDatosFactura.add(listaProductoFactura, BorderLayout.SOUTH);
+	     
+	     LineBorder lineaBorde2 = new LineBorder(Color.BLACK); //Agregar borde con titulo
+		 TitledBorder borDatos2 = new TitledBorder(lineaBorde2, "Lista de compra");
+		 listaProductoFactura.setBorder(borDatos2);
+	     
+		 JScrollPane scrollPane = new JScrollPane();
+	     scrollPane.setBounds(10,11,560, 227);
+	     listaProductoFactura.add(scrollPane, BorderLayout.NORTH);
+	     
+	     //Nombre de columnas
+	     String[] nombreDeColumnas = {"Codigo", "Detalle", "Cantidad", 
+	    		 "V. Unitario", "V. Total"
+	     };
+	     //Crea un modelo de tabla
+	     model = new DefaultTableModel(null, nombreDeColumnas);
+	     //Añade modelo a tabla
+	     table = new JTable(model);
+	     //Muestra tabla en scrollpane
+	     scrollPane.setViewportView(table); 
+	     
+	     //Etiquetas y JFields de importes totales
+	     
+	     JPanel imToFactura = new JPanel();
+	     imToFactura.setLayout(new GridLayout(5, 2));
+	     listaProductoFactura.add(imToFactura, BorderLayout.SOUTH);
+	     
+	     labSubtotal = new JLabel("Subtotal");
+	     imToFactura.add(labSubtotal);
+	     
+	     txtSubtotal = new JTextField();
+	     imToFactura.add(txtSubtotal);
+	     
+	     labDescuento = new JLabel("Descuento");
+	     imToFactura.add(labDescuento);
+	     
+	     txtDescuento = new JTextField();
+	     imToFactura.add(txtDescuento);
+	     
+	     labSubDescuento = new JLabel("Sub. Descuento");
+	     imToFactura.add(labSubDescuento);
+	     
+	     txtSubDescuento = new JTextField();
+	     imToFactura.add(txtSubDescuento);
+	     
+	     labIVA = new JLabel("IVA 12%");
+	     imToFactura.add(labIVA);
+	     
+	     txtIVA = new JTextField();
+	     imToFactura.add(txtIVA);
+	     
+	     labTotal = new JLabel("Total");
+	     imToFactura.add(labTotal);
+	     
+	     txtTotal = new JTextField();
+	     imToFactura.add(txtTotal);
 	}
 
 	public void actionPerformed(ActionEvent e) {
