@@ -71,7 +71,7 @@ public class Producto {
 
 	public Producto(BasicDBObject dBObjectProducto) {
 		this.codigo = dBObjectProducto.getString("codigo");
-		this.descripcion = dBObjectProducto.getString("cescripcion");
+		this.descripcion = dBObjectProducto.getString("descripcion");
 		this.precio = dBObjectProducto.getDouble("precio");
 	}
 	public String getCodigo() {
@@ -118,4 +118,16 @@ public class Producto {
 				+ ", cantidad=" + this.cantidad + "]";
 	}
 
+	public String codigoToString() {
+		return this.codigo;
+	}
+	
+	public String descripcionToString() {
+		return this.descripcion;
+	}
+	
+	public String precioToString() {
+		String Sprecio = Double.toString(this.precio);
+		return Sprecio;
+	}
 }

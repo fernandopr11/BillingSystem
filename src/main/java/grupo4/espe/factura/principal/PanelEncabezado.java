@@ -63,13 +63,13 @@ public class PanelEncabezado extends JPanel{
 	    TitledBorder borDatos = new TitledBorder(lineaBorde, " Datos de cliente ");
 	    datosCliente.setBorder(borDatos);
 	    
-	    labCedRUC = new JLabel("Cedula/RUC (Configurar)");
+	    labCedRUC = new JLabel("Cedula/RUC");
 	    datosCliente.add(labCedRUC);
 	    
 	    txtCedRUC = new JTextField();
 	    datosCliente.add(txtCedRUC);
 	    
-	    labNombrePE = new JLabel("Nomnbre / Nombre empresa: ");
+	    labNombrePE = new JLabel("Cliente: ");
 	    datosCliente.add(labNombrePE);
 	    
 	    txtNombrePE = new JTextField();

@@ -63,23 +63,7 @@ public class ConexionMongoTecnoSmart {
 		}
 	}
 	
-	/*public void encontrarProducto(DB db, String codigo) {
-		BasicDBObject documento = new BasicDBObject("codigo", new BasicDBObject("$regex", codigo));
-		DBCursor cursor = db.getCollection("Inventario").find(documento);
-		 
-		List<Producto> productos = new ArrayList<Producto>();
-		Producto producto = null;
-		Iterator<DBObject> iter = cursor.iterator();
-		while (iter.hasNext()) {
-		  Document documento2 = (Document) iter.next();
-		  producto = new Producto();
-		  producto.setCodigo(((BasicBSONObject) documento2).getString("codigo"));
-		  producto.setDescripcion(((BasicBSONObject) documento2).getString("descripcion"));
-		  producto.setPrecio(((BasicBSONObject) documento2).getDouble("precio"));
-		  productos.add(producto);
-		}
-	}
-	*/
+	
 	public void  mostrarProducto(DBCollection collection, String codigo){
 		DBObject query = new BasicDBObject("codigo", new BasicDBObject("$regex", codigo));
 		DBCursor cursor = collection.find(query);
@@ -93,39 +77,4 @@ public class ConexionMongoTecnoSmart {
 		}
 	}
 	
-	/*public void   mostrarProducto(DBCollection collection, String codigo){
-		DBCollection colect = collection;
-		
-		BasicDBObject consulta = new BasicDBObject();
-        consulta.put("codigo", codigo);
-        
-        DBCursor cursor = colect.find(consulta);
-        try {
-        while(cursor.hasNext()) {
-        	System.out.println(consulta.toString());
-         }
-        }finally {
-        	cursor.close();
-        }
-	}
-        */
-	/*
-	 * public static void buscarPorNombre(DB db, DBCollection coleccion, String nombre) {
-        DBCollection colect = coleccion;
-        
-        // CREAMOS LA CONSULTA CON EL CAMPO NOMBRE
-        BasicDBObject consulta = new BasicDBObject();
-        consulta.put("nombre", nombre);
-        
-        // BUSCA Y MUESTRA TODOS LOS DOCUMENTOS QUE COINCIDAN CON LA CONSULTA
-        DBCursor cursor = colect.find(consulta);
-        while(cursor.hasNext()) {
-        	String nombreM = (String) cursor.next().get("nombre");
-        	txtMNombre.setText(nombreM);
-        	
-        	int edadM = (Integer) cursor.curr().get("edad");
-        	String valEdad = Integer.toString(edadM);
-        	txtMEdad.setText(valEdad);
-        }
-	 */
 }
