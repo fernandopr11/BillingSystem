@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,7 +17,7 @@ public class PanelEncabezado extends JPanel{
 	private InterfazFacturaPrincipal principal;
 	
 	private DateTimeFormatter dtf;
-	
+	private static final String RUTA_IMAGEN = "./dataImg/logoImg.jpeg";
 	private JPanel logo;
     private JPanel fechFac;
     //Datos cliente
@@ -44,7 +45,8 @@ public class PanelEncabezado extends JPanel{
 		logo.setLayout(new GridLayout(1,1));
 		add(logo, BorderLayout.WEST);
 		
-		JLabel fotoLogo = new JLabel("Logo aqui");
+		JLabel fotoLogo = new JLabel();
+		fotoLogo.setIcon(new ImageIcon(RUTA_IMAGEN));
 		logo.add(fotoLogo);
 		
 		//Fecha y nunero de factura EAST
@@ -63,7 +65,7 @@ public class PanelEncabezado extends JPanel{
 	    fechaFactura = new JTextField(fecha);
 	    fechFac.add(fechaFactura);
 	  
-	    fechFac.add(new JLabel("Nº Factura"));
+	    fechFac.add(new JLabel("Nï¿½ Factura"));
 	    numeroFactura = new JTextField("");
 	    fechFac.add(numeroFactura);
 	    

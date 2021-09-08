@@ -24,7 +24,7 @@ public class ClientesTest {
 
 	public void setup1() {
 
-		cliente = new Cliente("2350818148", "Samuel Ledesma", 993601086, "wledesma@espe.edu.ec", "Proletariado");
+		cliente = new Cliente("2350818148", "Samuel Ledesma", "0993601086", "wledesma@espe.edu.ec", "Proletariado");
 
 	}
 
@@ -68,7 +68,7 @@ public class ClientesTest {
 
 		setup1();
 
-		assertEquals("El numero de telofono es incorrecto", 993601086, cliente.getTelefono());
+		assertEquals("El numero de telofono es incorrecto", "0993601086", cliente.getTelefono());
 
 	}
 

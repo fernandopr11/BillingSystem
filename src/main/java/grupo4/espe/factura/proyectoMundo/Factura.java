@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import com.mongodb.BasicDBObject;
 
-public class Factura extends Cliente{
+public class Factura {
 
 	/*
 	 * Fecha en que se emitio la factura
 	 */
-	//private Date fecha;
+	// private Date fecha;
 
 	/*
 	 * Numero de factura
@@ -60,68 +60,26 @@ public class Factura extends Cliente{
 	 * Total a pagar
 	 */
 	private Double totalPagar;
-/*
-	//Datos de cliente
-	private Cliente datosCliente;
 
-	private String cedula = datosCliente.getCedula();
-	private String nombreCliente = datosCliente.getNombre();
-	private String telefono = datosCliente.getTelefono();
-	private String correo = datosCliente.getCorreo();
-	private String direccion = datosCliente.getDireccion();
-*/
-	//Conversion de datos
-	//String fechaFac = fecha.toString();
-	String numeroDeFactura = Integer.toString(numeroFactura);
+	public Factura(Cliente cliente, ArrayList<Producto> productos) {
 
-	public Factura(/*String fecha,*/String numeroDeFactura, String cedula, String cliente, String telefono, String correo, String direccion) {
+		this.cliente = cliente;
+		this.productos = productos;
 
-		super(cedula, cliente, telefono, correo, direccion);
-		//this.fechaFac = fecha;
-		this.numeroDeFactura = numeroDeFactura;
-		/*this.cedula = cedula;
-		this.nombreCliente = cliente;
-		this.telefono = telefono;
-		this.correo = correo;
-		this.direccion = direccion;
-*/
-		//this.subtotal = subtotal;
-		//this.descuento = descuento;
-		//this.subDescuento = subDescuento;
-		//this.totalPagar = totalPagar;
-		//this.totalImpuesto = pImpuesto;
-		//this.productos = pProducto;
 	}
 
 	public BasicDBObject toDBObjectFactura() {
 		BasicDBObject dBObjectFactura = new BasicDBObject();
 
-		//dBObjectFactura.append("fecha", this.getFecha());
-		dBObjectFactura.append("numero factura", this.getNumeroFactura());
-		dBObjectFactura.append("cedula", this.getCedula());
-		dBObjectFactura.append("nombre", this.getNombre());
-		dBObjectFactura.append("telefono", this.getTelefono());
-		dBObjectFactura.append("correo", this.getCorreo());
-		dBObjectFactura.append("direccion", this.getDireccion());
-		
+		dBObjectFactura.append("numero", this.getNumeroFactura());
+		dBObjectFactura.append("subtotal", this.getSubtotal());
+		dBObjectFactura.append("subdescuento", this.getSubDescuento());
+		dBObjectFactura.append("totalimpuesto", this.getTotalImpuesto());
+		dBObjectFactura.append("totalpagar", this.getTotalPagar());
+
 		return dBObjectFactura;
-	}
-
-	/*public Factura(BasicDBObject dBObjectFactura) {
 
 	}
-
-/*
-	public Producto(BasicDBObject dBObjectProducto) {
-		this.codigo = dBObjectProducto.getString("codigo");
-		this.descripcion = dBObjectProducto.getString("descripcion");
-		this.precio = dBObjectProducto.getDouble("precio");
-	}
-	 */
-
-	/*public Date getFecha() {
-		return fecha;
-	}*/
 
 	public int getNumeroFactura() {
 		return numeroFactura;
@@ -142,33 +100,6 @@ public class Factura extends Cliente{
 	public Double getTotalPagar() {
 		return totalPagar;
 	}
-	/*
-	//Getters de cliente
-	public String getCedula() {
-		return this.cedula;
-	}
-	
-	public String getNombreCliente() {
-		return this.nombreCliente;
-	}
-	
-	public String getTelefono() {
-		return this.telefono;
-	}
-	
-	public String getCorreo() {
-		return this.correo;
-	}
-	
-	public String getDireccion() {
-		return this.direccion;
-	}
-
-*/
-
-	/*public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}*/
 
 	public void setNumeroFactura(int numeroFactura) {
 		this.numeroFactura = numeroFactura;
@@ -222,9 +153,6 @@ public class Factura extends Cliente{
 		return iva;
 	}
 
-
-
-
 	public Double calcularSubtotal() {
 
 		double subtotal = 0.0;
@@ -258,11 +186,9 @@ public class Factura extends Cliente{
 
 	public Double calcularTotal() {
 
-
 		double subtotal = 0.0;
 		double totalImpuesto = 0.0;
 		double totalPagar = 0.0;
-
 
 		for (Producto produc : productos) {
 
@@ -277,6 +203,5 @@ public class Factura extends Cliente{
 		return totalPagar;
 
 	}
-
 
 }

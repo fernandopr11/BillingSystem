@@ -31,7 +31,7 @@ public class FacturaTest {
 		pProducto.add(producto1);
 		pProducto.add(producto2);
 
-		Cliente client1 = new Cliente("2350818148", "Samuel Ledesma", 993601086, "wledesma@espe.edu.ec",
+		Cliente client1 = new Cliente("2350818148", "Samuel Ledesma" , "0993601086", "wledesma@espe.edu.ec",
 				"Proletariado");
 
 		factura = new Factura(client1, pProducto);
