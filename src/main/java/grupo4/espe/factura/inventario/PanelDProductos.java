@@ -38,6 +38,12 @@ public class PanelDProductos extends JPanel implements ActionListener {
 
 	private final static String GUARDAR_MONGO = "Guardar mongo";
 
+	/*
+	 * Comando para mostrar la ventana de los metodos funcionales
+	 */
+
+	private final static String METODOS = "METODOS";
+
 	// -----------------------------------------
 	// Atributos
 	// -----------------------------------------
@@ -97,6 +103,11 @@ public class PanelDProductos extends JPanel implements ActionListener {
 	 */
 	private TiendaTecnoSmart pTienda;
 
+	/*
+	 * Boton para los metodos funcionales
+	 */
+	private JButton btnMetodos;
+
 	// Constructor para iniciar el panel
 	public PanelDProductos(Inventario pPrincipal, TiendaTecnoSmart myTienda, Boolean pControl) {
 
@@ -142,13 +153,19 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		btnLimpiarCampos.setBackground(Color.decode("#A3A3F1"));
 		btnLimpiarCampos.setActionCommand(LIMPIAR_CAMPOS);
 
+		// Configuracion del boron para los metodos funcionales
+
+		btnMetodos = new JButton("Metodos");
+		btnMetodos.setBackground(Color.decode("#6F71E3"));
+		btnMetodos.setActionCommand(METODOS);
+
 		/*
 		 * Llamada al metodo addActionListener sobre los botones, el panel es encargado
 		 * de atender a los eventos
 		 */
 
 		btnLimpiarCampos.addActionListener(this);
-		// Se agregan los elementos al panel
+		btnMetodos.addActionListener(this);
 
 		add(labCodigo);
 		add(txtCodigo);
@@ -159,6 +176,8 @@ public class PanelDProductos extends JPanel implements ActionListener {
 		add(labCantidad);
 		add(txtCantidad);
 		add(btnLimpiarCampos);
+		add(btnMetodos);
+
 	}
 
 	// Metodos funcionales
@@ -302,9 +321,23 @@ public class PanelDProductos extends JPanel implements ActionListener {
 
 			this.limpiarCampos();
 
+		} else if (comando.equals(METODOS)) {
+
+			String productoMasCaro = "Producto mas caro > " + pTienda.darProductoMasCaro();
+
+			String productoMasBarto = "Producto mas barato > " + pTienda.darProductoMasBarato();
+
+			double promedioPrecioVenta = pTienda.darPromedioPrecioVenta();
+
+			JOptionPane.showMessageDialog(this, productoMasCaro, "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, productoMasBarto, "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Promedio precio venta " + promedioPrecioVenta, "Respuesta",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}
+
+	
 
 	public void guardarMongoDatosProducto() {
 

@@ -61,7 +61,7 @@ public class Factura {
 
 	public Factura(Date fecha, int numeroFactura, Double subtotal, Double descuento, Double subDescuento,
 			Double totalPagar, Cliente pCliente, ArrayList<Producto> pProducto, Double pImpuesto) {
-		
+
 		this.fecha = fecha;
 		this.numeroFactura = numeroFactura;
 		this.subtotal = subtotal;
@@ -70,6 +70,12 @@ public class Factura {
 		this.totalPagar = totalPagar;
 		this.cliente = pCliente;
 		this.totalImpuesto = pImpuesto;
+		this.productos = pProducto;
+	}
+
+	public Factura(Cliente pCliente, ArrayList<Producto> pProducto) {
+
+		this.cliente = pCliente;
 		this.productos = pProducto;
 	}
 
@@ -127,9 +133,11 @@ public class Factura {
 
 	public Double calcularSubtotal() {
 
+		double subtotal = 0.0;
+
 		for (Producto produc : productos) {
 
-			subtotal = produc.calcularImporte();
+			subtotal += produc.calcularImporte();
 
 		}
 
@@ -139,11 +147,14 @@ public class Factura {
 
 	public Double calcularIva() {
 
+		double subtotal = 0.0;
+		double totalImpuesto = 0.0;
+
 		for (Producto produc : productos) {
 
-			subtotal = produc.calcularImporte();
+			subtotal += produc.calcularImporte();
 
-			totalImpuesto = subtotal * iva;
+			totalImpuesto = subtotal * 0.14;
 
 		}
 
@@ -152,14 +163,20 @@ public class Factura {
 	}
 
 	public Double calcularTotal() {
+		
+		
+		double subtotal = 0.0;
+		double totalImpuesto = 0.0;
+		double totalPagar = 0.0;
+		
 
 		for (Producto produc : productos) {
 
-			subtotal = produc.calcularImporte();
+			subtotal += produc.calcularImporte();
 
-			totalImpuesto = subtotal * iva;
+			totalImpuesto = subtotal * 0.14;
 
-			totalPagar = subtotal + iva;
+			totalPagar = subtotal + totalImpuesto;
 
 		}
 

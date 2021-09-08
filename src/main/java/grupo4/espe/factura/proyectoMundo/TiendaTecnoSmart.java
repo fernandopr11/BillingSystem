@@ -2,6 +2,7 @@ package grupo4.espe.factura.proyectoMundo;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -26,10 +27,17 @@ public class TiendaTecnoSmart {
 	 * Facturas generadas
 	 */
 
+	/*
+	 * Facturas generadas
+	 */
+
+	private ArrayList<Factura> facturas;
+
 	public TiendaTecnoSmart() {
 
 		productos = new ArrayList<Producto>();
 
+		facturas = new ArrayList<Factura>();
 	}
 
 	// ----------------------------------------
@@ -47,6 +55,18 @@ public class TiendaTecnoSmart {
 		productos.add(producto);
 
 	}
+	/*
+	 * Agregar una factura
+	 */
+
+	public void agregarFactura(Date fecha, int numeroFactura, Double subtotal, Double descuento, Double subDescuento,
+			Double totalPagar, Cliente pCliente, ArrayList<Producto> pProducto, Double pImpuesto) {
+
+		Factura factura = new Factura(pCliente, pProducto);
+
+		facturas.add(factura);
+
+	}
 
 	/*
 	 * Devuelve la lista de los productos de la tienda
@@ -60,7 +80,7 @@ public class TiendaTecnoSmart {
 	 * Metodo para mostrar el producto mas caro de la tienda
 	 */
 
-	public String darProductoMasCaro(ArrayList<Producto> misProductos) {
+	public String darProductoMasCaro() {
 
 		String resultadoProductoMasCaro = "";
 
@@ -68,7 +88,7 @@ public class TiendaTecnoSmart {
 
 		double precioProductoMasCaro = 0.0;
 
-		for (Producto productoActual : misProductos) {
+		for (Producto productoActual : productos) {
 
 			if (productoActual.getPrecio() > precioProductoMasCaro) {
 
@@ -88,7 +108,7 @@ public class TiendaTecnoSmart {
 	 * Metodo para mostrar el producto mas barato de la tienda
 	 */
 
-	public String darProductoMasBarato(ArrayList<Producto> misProductos) {
+	public String darProductoMasBarato() {
 
 		String resultado = "";
 
@@ -96,21 +116,21 @@ public class TiendaTecnoSmart {
 
 		double precioMenosCostoso = 0.0;
 
-		if (misProductos.size() > 0) {
+		if (productos.size() > 0) {
 
-			menosCostoso = misProductos.get(0);
-			precioMenosCostoso = misProductos.get(0).getPrecio();
+			menosCostoso = productos.get(0);
 
-			for (int i = 0; i < misProductos.size(); i++) {
+			precioMenosCostoso = productos.get(0).getPrecio();
 
-				Producto actual = misProductos.get(i);
+			for (int i = 0; i < productos.size(); i++) {
+
+				Producto actual = productos.get(i);
 
 				if (actual.getPrecio() < precioMenosCostoso) {
 
-					menosCostoso = actual;
-					precioMenosCostoso = actual.getPrecio();
-
 					resultado = actual.toString();
+
+					menosCostoso = actual;
 
 				}
 
@@ -123,8 +143,78 @@ public class TiendaTecnoSmart {
 	}
 
 	/*
-	 * 
+	 * Metodo para dar el precio promedio de venta de los productos
 	 */
+
+	public Double darPromedioPrecioVenta() {
+
+		int cantidadProductos = productos.size();
+		double sumarPrecioVenta = 0.0;
+		double promedioVenta = 0;
+
+		for (Producto produc : productos) {
+
+			sumarPrecioVenta += produc.getPrecio();
+
+			promedioVenta = (sumarPrecioVenta / cantidadProductos);
+
+		}
+
+		return promedioVenta;
+
+	}
+
+	/*
+	 * Metodo para buscar un producto por el codigo
+	 */
+
+	public Producto buscarProductoPorCodigo(String pCodigo) {
+
+		Producto buscado = null;
+
+		int i = 0;
+
+		while (i < productos.size() && buscado == null) {
+
+			Producto actual = productos.get(i);
+
+			if (actual.getCodigo().equals(pCodigo)) {
+
+				buscado = actual;
+
+			}
+
+		}
+
+		return buscado;
+
+	}
+
+	/*
+	 * Metodo para buscar una factura por el numero
+	 */
+
+	public Factura buscarFacturaNumero(int numero) {
+
+		Factura buscada = null;
+
+		int i = 0;
+
+		while (i < facturas.size() && buscada == null) {
+
+			Factura actual = facturas.get(i);
+
+			if (actual.getNumeroFactura() == numero) {
+
+				buscada = actual;
+
+			}
+
+		}
+
+		return buscada;
+
+	}
 
 	/*
 	 * Metodo para grabar el array list de los producto en mongoDB
@@ -148,7 +238,5 @@ public class TiendaTecnoSmart {
 		}
 
 	}
-	
-	
 
 }
