@@ -294,4 +294,6 @@ public class PanelAgregaDatosFactura extends JPanel implements ActionListener{
 		String cant = txtCantidad.getText();
 		return cant;
 	}
+	
+	
 }

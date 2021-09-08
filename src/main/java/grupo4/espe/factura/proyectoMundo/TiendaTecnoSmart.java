@@ -59,14 +59,14 @@ public class TiendaTecnoSmart {
 	 * Agregar una factura
 	 */
 
-	public void agregarFactura(Date fecha, int numeroFactura, Double subtotal, Double descuento, Double subDescuento,
+	/*public void agregarFactura(Date fecha, String numeroFactura, Double subtotal, Double descuento, Double subDescuento,
 			Double totalPagar, Cliente pCliente, ArrayList<Producto> pProducto, Double pImpuesto) {
 
 		Factura factura = new Factura(pCliente, pProducto);
 
 		facturas.add(factura);
 
-	}
+	}*/
 
 	/*
 	 * Devuelve la lista de los productos de la tienda

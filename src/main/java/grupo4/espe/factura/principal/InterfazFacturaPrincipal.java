@@ -34,7 +34,7 @@ public class InterfazFacturaPrincipal extends JFrame{
 		panelBotonesIzq = new PanelBotonesIzq(this);
 		add(panelBotonesIzq, BorderLayout.EAST);
 		
-		panelEncabezado = new PanelEncabezado(this);
+		panelEncabezado = new PanelEncabezado();
 		west1.add(panelEncabezado, BorderLayout.NORTH); //A�ade panelEncabezado a centro de distribucion 2
 		
 		JPanel centro2 = new JPanel();

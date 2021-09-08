@@ -56,9 +56,7 @@ public class PanelBusqueda extends JPanel  implements ActionListener{
 		listaProductoFactura.add(scrollPane, BorderLayout.CENTER);
 
 		//Nombre de columnas
-		String[] nombreDeColumnas = {"#FACT", "FECHA", "CLIENTE", 
-				"TIP. CLIENTE", "TOTAL"
-		};
+		String[] nombreDeColumnas = {"#FACT", "FECHA", "CLIENTE", "TOTAL"};
 		//Crea un modelo de tabla
 		model = new DefaultTableModel(null, nombreDeColumnas);
 		//Añade modelo a tabla

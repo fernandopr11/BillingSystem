@@ -3,6 +3,8 @@ package grupo4.espe.factura.principal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +14,8 @@ import javax.swing.border.TitledBorder;
 
 public class PanelEncabezado extends JPanel{
 	private InterfazFacturaPrincipal principal;
+	
+	private DateTimeFormatter dtf;
 	
 	private JPanel logo;
     private JPanel fechFac;
@@ -28,8 +32,11 @@ public class PanelEncabezado extends JPanel{
     private JLabel labDireccion;
     private JTextField txtDireccion;
 	
-	public PanelEncabezado(InterfazFacturaPrincipal pPrincipal) {
-		principal = pPrincipal;
+    private JTextField numeroFactura;
+    private JTextField fechaFactura;
+    
+	public PanelEncabezado() {
+		//principal = pPrincipal;
 		
 		setLayout(new BorderLayout());
 		//Logo WEST
@@ -45,14 +52,23 @@ public class PanelEncabezado extends JPanel{
 		fechFac.setLayout(new GridLayout(2,2));
 		add(fechFac, BorderLayout.EAST);
 		
+		dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+     	String fecha = dtf.format(LocalDateTime.now());
+		
 		TitledBorder border = new TitledBorder("");
 	    border.setTitleColor(Color.BLACK);
 	    fechFac.setBorder(border);
 	    
 	    fechFac.add(new JLabel("Fecha"));
-	    fechFac.add(new JLabel("_ _ _ _ _ _ _ _ _ _ _ _ _"));
+	    fechaFactura = new JTextField(fecha);
+	    fechFac.add(fechaFactura);
+	  
 	    fechFac.add(new JLabel("Nº Factura"));
-	    fechFac.add(new JLabel("_ _ _ _ _ _ _ _ _ _ _ _ _"));
+	    numeroFactura = new JTextField("");
+	    fechFac.add(numeroFactura);
+	    
+	    
+
 		//Datos Cliente
 	    datosCliente = new JPanel();
 	    datosCliente.setLayout(new GridLayout(5,2));
@@ -93,4 +109,39 @@ public class PanelEncabezado extends JPanel{
 		txtDireccion = new JTextField();
 		datosCliente.add(txtDireccion);
 	}
+	
+	//Datos de factura
+	/*public String darFechaFactura() {
+		String fechFac = fechaFactura.getText();
+		return fechFac;
+	}*/
+	
+	public String darNumFactura() {
+		String numFac = "12";//numeroFactura.getText();
+		return numFac;
+	}
+	
+	
+	//Datos de cliente
+	public String darCedula() {
+		String ced = txtCedRUC.getText();
+		return ced;
+	}
+	
+	public JTextField darNombre() {
+		return txtNombrePE;
+	}
+	
+	public JTextField darTelefono() {
+		return txtNumTelef;
+	}
+	
+	public JTextField darCorreo() {
+		return txtCorreo;
+	}
+	
+	public JTextField darDireccion() {
+		return txtDireccion;
+	}
+	
 }

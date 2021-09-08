@@ -16,7 +16,7 @@ public class Cliente {
 	/*
 	 * Numero de telefono
 	 */
-	private int telefono;
+	private String telefono;
 	/*
 	 * Correo del cliente
 	 */
@@ -26,7 +26,7 @@ public class Cliente {
 	 */
 	private String direccion;
 
-	public Cliente(String cedula, String nombre, int telefono, String correo, String direccion) {
+	public Cliente(String cedula, String nombre, String telefono, String correo, String direccion) {
 		this.cedula = cedula;
 		this.nombre = nombre;
 		this.telefono = telefono;
@@ -63,6 +63,14 @@ public class Cliente {
 		// Retorna el objeto mongo db
 		return dBObjectCliente;
 	}
+	
+	public Cliente(BasicDBObject dBObjectCliente) {
+		this.cedula = dBObjectCliente.getString("cedula");
+		this.nombre = dBObjectCliente.getString("nombre");
+		this.telefono = dBObjectCliente.getString("telefono");
+		this.correo = dBObjectCliente.getString("correo");
+		this.direccion = dBObjectCliente.getString("direccion");
+	}
 
 	public String getCedula() {
 		return cedula;
@@ -72,7 +80,7 @@ public class Cliente {
 		return nombre;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
@@ -92,7 +100,7 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
@@ -110,4 +118,7 @@ public class Cliente {
 				+ ", direccion=" + direccion + "]";
 	}
 
+	public String nombreToString() {
+		return this.nombre;
+	}
 }
